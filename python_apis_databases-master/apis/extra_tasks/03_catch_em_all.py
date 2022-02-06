@@ -11,3 +11,14 @@ BONUS: Using your script, create a folder and download the main 'front_default'
        Name the files appropriately using the name data from your response.
 
 '''
+import requests
+from pprint import pprint
+
+url="https://pokeapi.co/api/v2/pokemon/"
+for num in range(1,20):
+       height=requests.get(url+str(num)).json()["height"]
+       name=requests.get(url+str(num)).json()["name"]
+       print(name,height)
+
+
+
