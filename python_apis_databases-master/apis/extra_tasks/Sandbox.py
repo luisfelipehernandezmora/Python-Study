@@ -36,7 +36,3 @@
 #         writer = csv.writer(file)
 #         writer.writerow(data)
 
-import time
-
-ful_date=time.strftime("%c")
-print(f"Today is {ful_date}")

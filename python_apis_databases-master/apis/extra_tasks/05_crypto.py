@@ -49,9 +49,9 @@ print(f"Today is {ful_date}")
 # while response.json()[index]["currency"]!="BTC":
 #     index+=1
 timer=0
-increment=11
+increment=10
 btc_history={}
-while timer<40:
+while timer<50:
     time_string = time.strftime("%H:%M:%S")
     params={
         "key":"3500ecce876792a90a078c86001b3cc7d5a78986",
@@ -74,12 +74,10 @@ for key in btc_history.keys():
         file.write(f"Time: {key}  the price of Bitcoin was: {btc_history[key]} USD \n")
     print("Date : {} , Price in USD : {}".format(key,btc_history[key]))
 
-with open('Bitcoin price quest.csv', 'a') as file:
-    writer = csv.writer(file)
-    writer.writerow(ful_date)
 
 for key in btc_history.keys():
-    data = ["Date searched ",key," ","Price in USD ",btc_history[key]]
+    #data = ["Date searched ",key," ","Price in USD ",btc_history[key]]
+    data = [key,btc_history[key]]
     with open('Bitcoin price quest.csv', 'a') as file:
         writer = csv.writer(file)
         writer.writerow(data)
