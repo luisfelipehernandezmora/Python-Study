@@ -14,35 +14,77 @@ HINTS:
 BONUS: Explore the logging package for easier tracking
 
 '''
+
+
 import requests
 from pprint import pprint
-# url="https://api.nomics.com/v1/currencies/ticker?key=3500ecce876792a90a078c86001b3cc7d5a78986&ids=BTC,ETH,XRP&interval=1d,30d&convert=EUR&platform-currency=ETH&per-page=100&page=1"
-# request=requests.get(url).json()["price"]
-# pprint(request)
+import time
+import csv
+ful_date=time.strftime("%c")
+print(f"Today is {ful_date}")
+
+##Session on how to search using request library and packages, but was on the worng endpoint /prices
+# params={
+#     "key":"3500ecce876792a90a078c86001b3cc7d5a78986",
+#     "ids": "BTC,ETH", #"BTC,ETH,XRP
+#     "interval":"1d,30d",
+#     "convert":"EUR",
+#     "platform-currency":"ETH",
+#     "per-page":100,
+#     "page":1,
+# }
+# url="https://api.nomics.com/v1/currencies/ticker"
+# response=requests.get(url, params=params)
+# pprint(response.json()[0]["price"])
+# print(response.status_code)
 
 
-# import urllib.request
-# url = """https://api.nomics.com/v1/currencies/ticker?
-# key=your-key-here
-# &ids=BTC,ETH,XRP
-# &interval=1d,30d
-# &convert=EUR
-# &platform-currency=ETH
-# &per-page=100
-# &page=1"""
-# print(urllib.request.urlopen(url).read())
+# params={
+#     "key":"3500ecce876792a90a078c86001b3cc7d5a78986",
+# }
+# url="https://api.nomics.com/v1/prices"
+# response=requests.get(url, params=params)
+# #Use this section to find the index of bitcoin in the API of nomics
+# index=0
+# while response.json()[index]["currency"]!="BTC":
+#     index+=1
+timer=0
+increment=11
+btc_history={}
+while timer<40:
+    time_string = time.strftime("%H:%M:%S")
+    params={
+        "key":"3500ecce876792a90a078c86001b3cc7d5a78986",
+    }
+    url="https://api.nomics.com/v1/prices"
+    response=requests.get(url, params=params)
+    index=0 #Use this section to find the index of bitcoin in the API of nomics
+    while response.json()[index]["currency"]!="BTC":
+        index+=1   
+    print(response.json()[index], index, time_string)
+    
+    price=(response.json()[index]["price"])
+    #price=round(price,2)
+    btc_history[time_string]=price
+    timer+=increment
+    time.sleep(increment)
+btc_history
+for key in btc_history.keys():
+    with open ("Bitcoin price exercise.txt","a") as file:
+        file.write(f"Time: {key}  the price of Bitcoin was: {btc_history[key]} USD \n")
+    print("Date : {} , Price in USD : {}".format(key,btc_history[key]))
 
-params={
-    "key":"3500ecce876792a90a078c86001b3cc7d5a78986",
-    "ids": "BTC,ETH", #"BTC,ETH,XRP
-    "interval":"1d,30d",
-    "convert":"EUR",
-    "platform-currency":"ETH",
-    "per-page":100,
-    "page":1,
-}
-url="https://api.nomics.com/v1/currencies/ticker"
-response=requests.get(url, params=params)
-pprint(response.json()[0]["price"])
-#a=response.json()
-print(response.status_code)
+with open('Bitcoin price quest.csv', 'a') as file:
+    writer = csv.writer(file)
+    writer.writerow(ful_date)
+
+for key in btc_history.keys():
+    data = ["Date searched ",key," ","Price in USD ",btc_history[key]]
+    with open('Bitcoin price quest.csv', 'a') as file:
+        writer = csv.writer(file)
+        writer.writerow(data)
+
+# print(response.json()[index], index) #This is to make sure we have what we want
+# price=float(response.json()[index]["price"]) #Make it a float to manipulate it and round
+# price=round(price,2) #this is what we want
+# print(price) 

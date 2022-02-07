@@ -20,5 +20,4 @@ Store the links in a JSON file that has the following form:
     },
     # next link item
 ]
-
 '''
