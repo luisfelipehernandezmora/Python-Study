@@ -9,3 +9,30 @@ Using the Chuck Norris API in combination with the datamuse API
 * Synthesize the collected results into an avant-garde poem and post on the forum ;)
 
 '''
+import requests
+from pprint import pprint
+
+#Get a random Chuck Norris phrase
+url="https://api.chucknorris.io/jokes/random"
+frase=requests.get(url).json()["value"]
+
+# Get the last word of the sentence to look a rhyme to it
+lista=[]
+#print(type(frase))
+lista=frase.split()
+
+#Take that last word
+last_word=lista[-1]
+#take awaya the dot of the word, to avoid problems with the rhyme api
+last_word=last_word[:-1]
+rima="https://api.datamuse.com/words?rel_rhy="+last_word
+rimas=requests.get(rima).json()[0]["word"]
+
+ful=frase+" "+rimas
+print(ful)
+
+#Write in the .txt file
+with open ("Chuck_Norris_Poem.txt","a") as file:
+    file.write(ful + "\n")
+    
+    
