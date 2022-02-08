@@ -49,9 +49,9 @@ print(f"Today is {ful_date}")
 # while response.json()[index]["currency"]!="BTC":
 #     index+=1
 timer=0
-increment=10
+increment=1
 btc_history={}
-while timer<50:
+while timer<600:
     time_string = time.strftime("%H:%M:%S")
     params={
         "key":"3500ecce876792a90a078c86001b3cc7d5a78986",
@@ -66,7 +66,7 @@ while timer<50:
     price=(response.json()[index]["price"])
     #price=round(price,2)
     btc_history[time_string]=price
-    timer+=increment
+    timer+=22
     time.sleep(increment)
 btc_history
 for key in btc_history.keys():
@@ -74,15 +74,9 @@ for key in btc_history.keys():
         file.write(f"Time: {key}  the price of Bitcoin was: {btc_history[key]} USD \n")
     print("Date : {} , Price in USD : {}".format(key,btc_history[key]))
 
-
 for key in btc_history.keys():
     #data = ["Date searched ",key," ","Price in USD ",btc_history[key]]
     data = [key,btc_history[key]]
     with open('Bitcoin price quest.csv', 'a') as file:
         writer = csv.writer(file)
         writer.writerow(data)
-
-# print(response.json()[index], index) #This is to make sure we have what we want
-# price=float(response.json()[index]["price"]) #Make it a float to manipulate it and round
-# price=round(price,2) #this is what we want
-# print(price) 
