@@ -9,7 +9,7 @@
 
 #print('line1\nline2\nline3')
 upper=int(input("up to which number we make a list? "))
-for i in range (0,upper):
+for i in range (0,upper+1):
     print(i,end = " ")
     if i%10==9:
        # print(end ="\n")

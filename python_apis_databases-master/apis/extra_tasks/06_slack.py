@@ -21,3 +21,6 @@ Store the links in a JSON file that has the following form:
     # next link item
 ]
 '''
+"""response = client.conversations_info(channel="C0XXXXXXX")
+
+https://stackoverflow.com/questions/66311700/how-read-slack-channel-messages-using-python-slackclient]"""
