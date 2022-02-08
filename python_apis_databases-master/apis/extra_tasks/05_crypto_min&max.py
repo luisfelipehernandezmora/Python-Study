@@ -14,47 +14,6 @@ HINTS:
 BONUS: Explore the logging package for easier tracking
 
 '''
-
-import requests
-from pprint import pprint
-import time
-import csv
-ful_date=time.strftime("%c")
-print(f"Today is {ful_date}")
-
-timer=0
-increment=1
-btc_history={}
-while timer<600:
-    time_string = time.strftime("%H:%M:%S")
-    params={
-        "key":"3500ecce876792a90a078c86001b3cc7d5a78986",
-    }
-    url="https://api.nomics.com/v1/prices"
-    response=requests.get(url, params=params)
-    index=0 #Use this section to find the index of bitcoin in the API of nomics
-    while response.json()[index]["currency"]!="BTC":
-        index+=1   
-    print(response.json()[index], index, time_string)
-    
-    price=(response.json()[index]["price"])
-    #price=round(price,2)
-    btc_history[time_string]=price
-    timer+=22
-    time.sleep(increment)
-btc_history
-for key in btc_history.keys():
-    with open ("Bitcoin price exercise.txt","a") as file:
-        file.write(f"Time: {key}  the price of Bitcoin was: {btc_history[key]} USD \n")
-    print("Date : {} , Price in USD : {}".format(key,btc_history[key]))
-
-for key in btc_history.keys():
-    #data = ["Date searched ",key," ","Price in USD ",btc_history[key]]
-    data = [key,btc_history[key]]
-    with open('Bitcoin price quest.csv', 'a') as file:
-        writer = csv.writer(file)
-        writer.writerow(data)
-
 #Find the maximun and minimum 
 import csv
 import numpy as np
@@ -63,15 +22,20 @@ with open('Bitcoin price quest.csv', 'r') as f:
     data = list(csv.reader(f, delimiter=","))
 
 data = np.array(data)
-a=float(data[3][1])
-a=round(a,2)
 mini=0
 maxi=0
 values=[]
 for x in data:
     value=float(x[1])
     values.append(value)
-    mini=min(values)
-    maxi=max(values)
-    
-print(f"The minimum price of BTC in this period was {mini} and the highest {maxi}")
+mini=min(values)
+maxi=max(values)
+min_time=""
+max_time=""
+for x in data: 
+    if float(x[1])==mini:
+        min_time=x[0]
+    elif float(x[1])==maxi:
+        max_time=x[0]
+print(f"""The minimum price of BTC in this period was {mini} happend on {min_time} 
+and the highest {maxi} that happend on {max_time}""")

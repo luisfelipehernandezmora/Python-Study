@@ -8,7 +8,6 @@ with open('Bitcoin price quest.csv', 'r') as f:
 data = np.array(data)
 a=float(data[3][1])
 a=round(a,2)
-#print(data[3], data[3][0], str(a) + " USD by bitcoin",type(a) )
 mini=0
 maxi=0
 values=[]
