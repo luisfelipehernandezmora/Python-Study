@@ -9,9 +9,12 @@
 # When encountering the dragon, they have the choice to fight it.
 # If they have the sword from the other room, then they will be able to defeat it and win the game.
 # If they don't have the sword, then they will be eaten by the dragon and lose the game.
-name=input("Hello! thanks for playing, what is your name? ")
+import requests
+
+url="https://uzby.com/api.php?min=4&max=10" #Get a random name for the user
+name=requests.get(url).text
 sword=False
-print("Hello",name,"! Welcome to the game!")
+print(f"Hello, today your name will be {name}! Welcome to the game!")
 
 choice=input("Please choose between this 2 doors, Left or Right? ") 
 
