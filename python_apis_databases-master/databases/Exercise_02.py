@@ -17,7 +17,7 @@ Consider each of the tasks below as a separate database query. Using SQLAlchemy,
 from unicodedata import category
 import sqlalchemy
 import os
-from pprint import pprint
+from pprint import pp, pprint
 
 user=os.environ["username"]
 key=os.environ["mysql_pass"]
@@ -30,6 +30,8 @@ question=int(input("""What you will like to do?
 2) Select all the actors and the films they have been in
 3) Select all the actors that have appeared in a category of your choice
 4) Select all the comedic films and sort them by rental rate
+5) Using one of the statements above, add a GROUP BY statement of your choice
+6) Using one of the statements above, add a ORDER BY statement of your choice
 """))
 
 ' 1) Select all the actors with the first name of your choice'
@@ -70,7 +72,33 @@ if question==3:
     response_set=response_proxy.fetchall()
     pprint(response_set)
 
-# '4) Select all the comedic films and sort them by rental rate'
-# if question==4:
-    
+'4) Select all the comedic films and sort them by rental rate'
+if question==4:
+    film_category=sqlalchemy.Table('film_category', metadata, autoload=True, autoload_with=engine)
+    film=sqlalchemy.Table('film', metadata, autoload=True, autoload_with=engine)
+    join_statement=film.join(film_category, film_category.columns.film_id==film.columns.film_id)
+    query4=sqlalchemy.select([film.columns.title, film.columns.rental_rate]).where(film_category.columns.category_id==5).order_by(sqlalchemy.asc(film.columns.rental_rate)).select_from(join_statement)
+    response_proxy=conection.execute(query4)
+    response_set=response_proxy.fetchall()
+    pprint(response_set)
+
+'5) Using one of the statements above, add a GROUP BY statement of your choice' #***pending
+if question==5:
+    film_category=sqlalchemy.Table('film_category', metadata, autoload=True, autoload_with=engine)
+    film=sqlalchemy.Table('film', metadata, autoload=True, autoload_with=engine)
+    join_statement=film.join(film_category, film_category.columns.film_id==film.columns.film_id)
+    query5=sqlalchemy.select([film.columns.title, film.columns.rental_rate]).where(film_category.columns.category_id==5).order_by(sqlalchemy.asc(film.columns.rental_rate)).select_from(join_statement)
+    response_proxy=conection.execute(query5)
+    response_set=response_proxy.fetchall()
+    pprint(response_set)
+
+'6) Using one of the statements above, add a ORDER BY statement of your choice'
+if question==6:
+    film_category=sqlalchemy.Table('film_category', metadata, autoload=True, autoload_with=engine)
+    film=sqlalchemy.Table('film', metadata, autoload=True, autoload_with=engine)
+    join_statement=film.join(film_category, film_category.columns.film_id==film.columns.film_id)
+    query4=sqlalchemy.select([film.columns.title, film.columns.rental_rate]).where(film_category.columns.category_id==5).order_by(sqlalchemy.asc(film.columns.rental_rate)).select_from(join_statement)
+    response_proxy=conection.execute(query4)
+    response_set=response_proxy.fetchall()
+    pprint(response_set)
 
