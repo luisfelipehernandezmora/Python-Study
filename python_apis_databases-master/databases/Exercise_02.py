@@ -14,7 +14,6 @@ Consider each of the tasks below as a separate database query. Using SQLAlchemy,
 - Using one of the statements above, add a ORDER BY statement of your choice
 
 '''
-from unicodedata import category
 import sqlalchemy
 import os
 from pprint import pp, pprint
