@@ -55,4 +55,15 @@ if question==2:
     response_set=response_proxy.fetchall()
     pprint(response_set)
 
-'3) Select all the actors that have appeared in a category of your choice'
+'3) Select all the actors that have appeared in a category of comedy of your choice'
+if question==3:
+    film_actor=sqlalchemy.Table('film_actor', metadata, autoload=True, autoload_with=engine)
+    actor=sqlalchemy.Table('actor', metadata, autoload=True, autoload_with=engine)
+    film=sqlalchemy.Table('film', metadata, autoload=True, autoload_with=engine)
+    film_category=sqlalchemy.Table('film_category', metadata, autoload=True, autoload_with=engine)
+    join_statement=actor.join(film_actor, film_actor.columns.actor_id==actor.columns.actor_id).join(film, film_actor.columns.film_id==film.columns.film_id).join(film_category, film_category.columns.film_id, film.columns.film_id)
+    query3=sqlalchemy.select([film.columns.title, actor.columns.first_name, actor.columns.last_name])
+
+    response_proxy=conection.execute(query3)
+    response_set=response_proxy.fetchmany(250)
+    pprint(response_set)
