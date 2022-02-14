@@ -27,6 +27,7 @@ conection=engine.connect()
 question=int(input("""What you will like to do? 
 1) Select all the actors with the first name of your choice
 2) Select all the actors and the films they have been in
+3) Select all the actors that have appeared in a category of your choice
 """))
 
 ' 1) Select all the actors with the first name of your choice'
@@ -53,3 +54,5 @@ if question==2:
     response_proxy=conection.execute(query2)
     response_set=response_proxy.fetchall()
     pprint(response_set)
+
+'3) Select all the actors that have appeared in a category of your choice'
