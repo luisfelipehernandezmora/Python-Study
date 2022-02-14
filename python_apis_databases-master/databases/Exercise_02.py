@@ -14,6 +14,7 @@ Consider each of the tasks below as a separate database query. Using SQLAlchemy,
 - Using one of the statements above, add a ORDER BY statement of your choice
 
 '''
+from unicodedata import category
 import sqlalchemy
 import os
 from pprint import pprint
@@ -28,6 +29,7 @@ question=int(input("""What you will like to do?
 1) Select all the actors with the first name of your choice
 2) Select all the actors and the films they have been in
 3) Select all the actors that have appeared in a category of your choice
+4) Select all the comedic films and sort them by rental rate
 """))
 
 ' 1) Select all the actors with the first name of your choice'
@@ -61,9 +63,14 @@ if question==3:
     actor=sqlalchemy.Table('actor', metadata, autoload=True, autoload_with=engine)
     film=sqlalchemy.Table('film', metadata, autoload=True, autoload_with=engine)
     film_category=sqlalchemy.Table('film_category', metadata, autoload=True, autoload_with=engine)
-    join_statement=actor.join(film_actor, film_actor.columns.actor_id==actor.columns.actor_id).join(film, film_actor.columns.film_id==film.columns.film_id).join(film_category, film_category.columns.film_id, film.columns.film_id)
-    query3=sqlalchemy.select([film.columns.title, actor.columns.first_name, actor.columns.last_name])
+    join_statement=actor.join(film_actor, film_actor.columns.actor_id==actor.columns.actor_id).join(film, film_actor.columns.film_id==film.columns.film_id).join(film_category, film_category.columns.film_id== film.columns.film_id)
+    query3=sqlalchemy.select([film.columns.title, actor.columns.first_name, actor.columns.last_name]).where(film_category.columns.category_id==5).select_from(join_statement)
 
     response_proxy=conection.execute(query3)
-    response_set=response_proxy.fetchmany(250)
+    response_set=response_proxy.fetchall()
     pprint(response_set)
+
+# '4) Select all the comedic films and sort them by rental rate'
+# if question==4:
+    
+
