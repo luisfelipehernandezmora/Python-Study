@@ -13,6 +13,10 @@ BONUS: Make this application something that a user can interact with from the CL
 to let the user decide what tables are going to be created, or what data is going to be inserted.
 The more dynamic the application, the better!
 '''
+from ast import Name
+from calendar import c
+from re import A
+from unittest import result
 import sqlalchemy
 import os
 from pprint import pprint
@@ -39,15 +43,44 @@ question=int(input("""What do you wnat to do?
 5) Delete data from a table
 6) Use at least one join in a select query ##Think how to rename this lines ***
 """))
-
+'1) Create a table'
 if question ==1:
     name=input("So, What is gonna be the name of your table? ")
-    cols=int(input("How many columns you want to put? "))
     cols_names=[]
-    for i in range(cols):
-        name_col=input(f"Write the name of the {i} column ")
+    for i in range(5):
+        name_col=input(f"Write the name of the 5 columns. Use the first column for Identification of data ")
         cols_names.append(name_col)
         i+=1
-    for x in cols_names:
-        query=sqlalchemy.Table(name, metadata, sqlalchemy.Column(x))
+    
+    query=sqlalchemy.Table(name, metadata, 
+        sqlalchemy.Column(cols_names[0],sqlalchemy.Integer()),
+        sqlalchemy.Column(cols_names[1],sqlalchemy.String(255)),
+        sqlalchemy.Column(cols_names[2],sqlalchemy.String(255)),
+        sqlalchemy.Column(cols_names[3],sqlalchemy.String(255)),
+        sqlalchemy.Column(cols_names[4],sqlalchemy.String(255)),
+    )
     metadata.create_all(engine)
+'2) Insert data to a table'
+if question ==2:
+    in_table=input("In which table you want to insert data? ")
+    
+    # Users=sqlalchemy.Table('Users',metadata,autoload=True,autoload_with=engine)
+    # a=Users.columns.keys()
+    use_table=sqlalchemy.Table(in_table,metadata,autoload=True,autoload_with=engine)
+    columnas=use_table.columns.keys()
+    insertion=[]
+    for i in range(len(columnas)):
+        ask=input(f"What value you want to insert for the column {columnas[i]}? ")
+        insertion.append(ask)
+        i+=1
+    query=sqlalchemy.insert(use_table).values(Id=insertion[0],Name=insertion[1],Email=insertion[2],Phone=insertion[3],City=insertion[4])
+    result_proxy=conection.execute(query)
+'3) Update data in a table'
+if question ==3:
+    in_table=input("In which table you want to update data? ")
+    use_table=sqlalchemy.Table(in_table,metadata,autoload=True,autoload_with=engine)
+    column_to_update=input("Which column you want to update? ")
+    new_value=input("Type your update ")
+    modified_id=input("which ID is the one to update?")
+    query=sqlalchemy.update(use_table).values(Email=new_value).where(use_table.columns.Id==modified_id)
+    result = conection.execute(query)
