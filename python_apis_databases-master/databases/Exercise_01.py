@@ -7,13 +7,13 @@ Using the provided database schema, write the necessary code to print informatio
 '''
 import sqlalchemy
 import pymysql
-# import os
+import os
 
-# user=os.environ("username")
-# key=os.environ("mysql_pass")
+user=os.environ["username"]
+key=os.environ["mysql_pass"]
 
 
-engine=sqlalchemy.create_engine('mysql+pymysql://root:Sabanilla1:@localhost/sakila')
+engine=sqlalchemy.create_engine('mysql+pymysql://'+user+':'+key+'@localhost/sakila')
 conection=engine.connect()
 metadata=sqlalchemy.MetaData()
 actor=sqlalchemy.Table('actor', metadata, autoload=True, autoload_with=engine)

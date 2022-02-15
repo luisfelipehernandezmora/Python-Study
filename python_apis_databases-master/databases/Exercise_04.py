@@ -13,10 +13,7 @@ BONUS: Make this application something that a user can interact with from the CL
 to let the user decide what tables are going to be created, or what data is going to be inserted.
 The more dynamic the application, the better!
 '''
-from ast import Name
-from calendar import c
-from re import A
-from unittest import result
+
 import sqlalchemy
 import os
 from pprint import pprint
@@ -79,8 +76,32 @@ if question ==2:
 if question ==3:
     in_table=input("In which table you want to update data? ")
     use_table=sqlalchemy.Table(in_table,metadata,autoload=True,autoload_with=engine)
+    columnas=use_table.columns.keys()
     column_to_update=input("Which column you want to update? ")
     new_value=input("Type your update ")
-    modified_id=input("which ID is the one to update?")
-    query=sqlalchemy.update(use_table).values(Email=new_value).where(use_table.columns.Id==modified_id)
-    result = conection.execute(query)
+    modified_id=input("which ID is the one to update? ")
+    query=sqlalchemy.update(use_table).values(Name=new_value).where(use_table.columns.Id==modified_id)
+    result_proxy = conection.execute(query)
+
+'4) Select data from a table'
+if question ==4:
+    in_table=input("In which table you want to select data from? ")
+    use_table=sqlalchemy.Table(in_table,metadata,autoload=True,autoload_with=engine)
+    columnas=use_table.columns.keys()
+    select_id=input("which ID is the one to select? ")
+    query=sqlalchemy.select([use_table]).where(use_table.columns.Id==select_id)
+    result_proxy = conection.execute(query)
+    result_set=result_proxy.fetchall()
+    pprint(result_set)
+
+'5) Delete data from a table'
+if question ==5:
+    in_table=input("In which table you want to delete data from? ")
+    use_table=sqlalchemy.Table(in_table,metadata,autoload=True,autoload_with=engine)
+    columnas=use_table.columns.keys()
+    delete_id=input("which ID is the one to select? ")
+    query=sqlalchemy.delete([use_table]).where(use_table.columns.Id==delete_id)
+    result_proxy = conection.execute(query)
+
+'6) Use at least one join in a select query ##Think how to rename this lines'
+#if question ==6:

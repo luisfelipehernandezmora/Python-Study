@@ -12,17 +12,18 @@ import sqlalchemy_utils
 
 
 #Keep your (strong) mysql password safe 
-user=os.environ["username"]
-key=os.environ["mysql_pass"]
+# user=os.environ["username"]
+# key=os.environ["mysql_pass"]
 
-engine = sqlalchemy.create_engine('mysql+pymysql://'+user+':'+key+'@localhost/GoodDB')
-conection=engine.connect()
-metadata=sqlalchemy.MetaData()
+# engine = sqlalchemy.create_engine('mysql+pymysql://'+user+':'+key+'@localhost/GoodDB')
+# conection=engine.connect()
+# metadata=sqlalchemy.MetaData()
 
-Users=sqlalchemy.Table('Users',metadata,autoload=True,autoload_with=engine)
-a=Users.columns.keys()
-print(a, type(a))
+# Users=sqlalchemy.Table('Users',metadata,autoload=True,autoload_with=engine)
+# a=Users.columns.keys()
+# print(a, type(a))
 
 
 
 # response_proxy=conection.execute(query)
+
