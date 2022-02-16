@@ -24,17 +24,18 @@ response=requests.get(url)
 data=response.json()["data"]
 users={}
 lista=[]
+lista2=[]
 existing_values=[]
 for i in data:
     c=i["id"]
     b=i["name"]
     e=i["userId"]
-    existing_values.append(c) #This will save all the existing records to don't overwrite anything
     print(f"Task id: {c} and task: {b} on User id {e}")
     users["Task_id"]=c
     users["Task"]=b
     users["User_id"]=e
     lista.append(users)
+    lista2.append(users)
     users={}
 
 #Going in to the DB and create a Table
@@ -50,17 +51,19 @@ query=sqlalchemy.Table("API_tasks_info_CodNom", metadata,
         sqlalchemy.Column("User_id",sqlalchemy.Integer())
     )
 metadata.create_all(engine)
+#Now we declare the table just created it
 use_table=sqlalchemy.Table("API_tasks_info_CodNom", metadata, autoload=True, autoload_with=engine)
 
 #Before passing the information, we want to know if the task already exists
-for elem in lista:
-    a=elem["Task_id"]
-    if a in existing_values:
-        lista.remove(elem)
-        
-if len(lista)==0:
-    print("Nothing to add, all is up-to-date")
-    quit()
+# a=0
+# for elem in lista:
+#     a=elem["Task_id"]
+#     if a in existing_values:
+#         lista.remove(elem)
+
+# if len(lista)==0:
+#     print("Nothing to add, all is up-to-date")
+#     quit()
 
 values=lista #We need a list of dictionaries
 query=sqlalchemy.insert(use_table)

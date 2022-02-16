@@ -92,7 +92,7 @@ if question ==4:
     query=sqlalchemy.select([use_table]).where(use_table.columns.Id==select_id)
     result_proxy = conection.execute(query)
     result_set=result_proxy.fetchall()
-    pprint(result_set)
+    print(result_set)
 
 '5) Delete data from a table'
 if question ==5:
