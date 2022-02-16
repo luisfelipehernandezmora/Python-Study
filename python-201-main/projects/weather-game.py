@@ -1,10 +1,8 @@
 # Include the current weather into your game mechanics.
-from cmath import pi
-from random import randrange
 import requests
 from pprint import pprint
 
-city=input("Type the name of your city ")
+city=input("From which city are you playing? The game will look like it today! ")
 if " " in city:
     a=city.split()
     ciudad=a[0]+"%20"+a[1]
