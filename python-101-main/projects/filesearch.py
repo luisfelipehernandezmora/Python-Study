@@ -14,3 +14,13 @@
 # Start with a small folder to make it easy to check whether your program is
 # working correctly. Then search a bigger folder.
 # This program should work for any specified folder on your computer.
+import pathlib
+
+folder=pathlib.Path("/home/luisfelipe/Coding Nomads/python-101-main/projects/filesearch_task")
+cantidades={}
+val=0
+for file in folder.iterdir():
+    ext=file.suffix
+    cantidades[ext]+=1
+for i in cantidades:
+    
