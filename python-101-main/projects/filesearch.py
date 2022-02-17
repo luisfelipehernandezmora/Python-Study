@@ -17,12 +17,11 @@
 import pathlib
 way="/home/luisfelipe/Coding Nomads/python-101-main/projects/filesearch_task"
 folder=pathlib.Path(way)
-cantidades=[]
-res1={}
-folders1=[]
-folders2=[]
 
 def buscador(folder):
+    res1={}
+    folders1=[]
+    cantidades=[]
     for file in folder.iterdir():
         ext=file.suffix
         cantidades.append(ext)
@@ -43,8 +42,14 @@ a=buscador(folder)
 first_level_files=a[0]
 first_level_subfolders=a[1]
 
+second_level_files={}
+second_level_subfolders=[]
+
 for subfolder in first_level_subfolders:
     second_run=buscador(subfolder)
-
+    b=second_run[0]
+    c=second_run[1]
+    second_level_files+=b
+    second_level_subfolders.append(c)
 
 
