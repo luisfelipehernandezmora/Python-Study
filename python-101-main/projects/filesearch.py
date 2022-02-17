@@ -15,12 +15,36 @@
 # working correctly. Then search a bigger folder.
 # This program should work for any specified folder on your computer.
 import pathlib
+way="/home/luisfelipe/Coding Nomads/python-101-main/projects/filesearch_task"
+folder=pathlib.Path(way)
+cantidades=[]
+res1={}
+folders1=[]
+folders2=[]
 
-folder=pathlib.Path("/home/luisfelipe/Coding Nomads/python-101-main/projects/filesearch_task")
-cantidades={}
-val=0
-for file in folder.iterdir():
-    ext=file.suffix
-    cantidades[ext]+=1
-for i in cantidades:
-    
+def buscador(folder):
+    for file in folder.iterdir():
+        ext=file.suffix
+        cantidades.append(ext)
+        #find the first level of subfolders 
+        if ext=="":
+            name=file.stem
+            folders1.append(name)
+    for i in cantidades:
+        res1[i]=cantidades.count(i)
+    level1=[]
+    for i in folders1:
+        path=way+"/"+i
+        level1.append(path)
+    b=[res1, level1]
+    return(b)
+
+a=buscador(folder)
+first_level_files=a[0]
+first_level_subfolders=a[1]
+
+for subfolder in first_level_subfolders:
+    second_run=buscador(subfolder)
+
+
+
