@@ -1,0 +1,78 @@
+import sqlalchemy
+from pprint import pprint
+
+engine = sqlalchemy.create_engine('mysql+pymysql://username:password@localhost/sakila')
+connection = engine.connect()
+metadata = sqlalchemy.MetaData()
+actor = sqlalchemy.Table('actor', metadata, autoload=True, autoload_with=engine)
+
+query = sqlalchemy.select([actor])
+result_proxy = connection.execute(query)
+
+result_set = result_proxy.fetchall()
+pprint(result_set)
+
+#If you are working with a large dataset, you can use the fetchmany() 
+#method instead of fetchall() and specify how many rows you want to be returned. For example:
+#result_set = result_proxy.fetchmany(5)
+-----------------------------------------------------------------------------------------------------
+		Filtering Data
+
+Now that we are familiar with a SELECT statement, let us take a look at how we can filter those results. The following are examples of SQL statements and their matching SQLAlchemy statements.
+
+WHERE
+The where statement
+
+SQL:
+
+SELECT * FROM sakila.actor WHERE first_name = "PENELOPE";
+SQLAlchemy:
+
+query = sqlalchemy.select([actor]).where(actor.columns.first_name == 'PENELOPE')
+
+IN
+
+The in statement
+
+SQL:
+
+SELECT * FROM sakila.actor WHERE first_name IN ("PENELOPE", "JOHN", "UMA");
+SQLAlchemy:
+
+query = sqlalchemy.select([actor]).where(actor.columns.first_name.in_(["PENELOPE", "JOHN", "UMA"]))
+AND, OR, NOT
+
+AND, OR, NOT statements
+
+SQL:
+
+SELECT * FROM sakila.film WHERE length > 60 AND rating = "PG";
+OR
+SELECT * FROM sakila.film WHERE length > 60 AND NOT rating = "PG";
+SQLAlchemy:
+
+query = sqlalchemy.select([film]).where(sqlalchemy.and_(film.columns.length > 60, film.columns.rating == "PG"))
+OR
+
+query = sqlalchemy.select([film]).where(sqlalchemy.and_(film.columns.length > 60, film.columns.rating != "PG"))
+
+ORDER BY
+ORDER BY Statements
+
+SQL:
+
+SELECT * FROM sakila.film ORDER BY replacement_cost ASC;
+SQLAlchemy:
+
+query = sqlalchemy.select([film]).order_by(sqlalchemy.asc(film.columns.replacement_cost))
+
+
+SUM AND OTHER FUNCTIONS
+SUM
+
+SQL:
+
+SELECT SUM(length) FROM sakila.film;
+SQLAlchemy:
+
+query = sqlalchemy.select([sqlalchemy.func.sum(film.columns.length)])

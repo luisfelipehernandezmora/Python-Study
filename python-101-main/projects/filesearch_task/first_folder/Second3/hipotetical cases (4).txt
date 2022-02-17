@@ -1,0 +1,5 @@
+3500ecce876792a90a078c86001b3cc7d5a78986
+
+https://api.nomics.com/
+
+Bitcoing currency API

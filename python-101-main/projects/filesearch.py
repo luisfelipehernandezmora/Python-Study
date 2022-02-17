@@ -15,7 +15,10 @@
 # working correctly. Then search a bigger folder.
 # This program should work for any specified folder on your computer.
 import pathlib
-way="/home/luisfelipe/Coding Nomads/python-101-main/projects/filesearch_task"
+from collections import Counter
+way="/home/luisfelipe/Coding Nomads/python-101-main"
+#way="/home/luisfelipe/Coding Nomads/python-101-main/projects/filesearch_task"
+
 folder=pathlib.Path(way)
 
 def buscador(folder):
@@ -24,11 +27,14 @@ def buscador(folder):
     cantidades=[]
     for file in folder.iterdir():
         ext=file.suffix
-        cantidades.append(ext)
+        
         #find the first level of subfolders 
         if ext=="":
             name=file.stem
             folders1.append(name)
+            ext="subfolder"
+        cantidades.append(ext)
+
     for i in cantidades:
         res1[i]=cantidades.count(i)
     level1=[]
@@ -43,13 +49,16 @@ first_level_files=a[0]
 first_level_subfolders=a[1]
 
 second_level_files={}
+second_level_files=Counter()
 second_level_subfolders=[]
 
-for subfolder in first_level_subfolders:
+for name in first_level_subfolders:
+    subfolder=pathlib.Path(name)
     second_run=buscador(subfolder)
-    b=second_run[0]
+    b=Counter(second_run[0])
     c=second_run[1]
     second_level_files+=b
     second_level_subfolders.append(c)
 
+print(f"So you went two levels deep, the first level have this many files \n {first_level_files} \n then in those subfolders you have total these files: \n {second_level_files} and {len(second_level_subfolders)} subfolder")
 
