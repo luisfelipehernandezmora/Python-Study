@@ -14,7 +14,30 @@
 # Display a winning message and the full word if they win
 # Display a losing message and quit the game if they don't make it
 import pathlib
+import random
 path=pathlib.Path("/home/luisfelipe/Coding Nomads/python-101-main/projects/English_words.txt")
 with open (path) as file:
     a=file.readlines()
-    print(a)
+c=[]
+for word in a:
+    if word=="yourself":
+        c.append(word)
+        continue
+    elif word=="a\n":
+        continue
+    b=word[:-1]
+    c.append(b)
+guess=random.choice(c)
+print(guess)
+#find out how many letters have the guess
+largo=len(guess)
+score=10
+mystery=""
+for i in range(len(guess)):
+    mystery+="_ "
+    i=+1
+mystery
+
+while score>0: #this will keep the player limited in tries
+    tri=input(f"Guess a letter you still have {score} points available")
+    
