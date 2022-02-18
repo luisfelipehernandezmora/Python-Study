@@ -17,29 +17,28 @@
 import pathlib
 from collections import Counter
 way="/home/luisfelipe/Coding Nomads/python-101-main"
-#way="/home/luisfelipe/Coding Nomads/python-101-main/projects/filesearch_task"
 
+#Define the path. Using way variable to able to concatanate strings downwards
 folder=pathlib.Path(way)
 
 def buscador(folder):
-    res1={}
-    folders1=[]
-    cantidades=[]
+    """It will tell the folders and files within the path given """
+
+    res1={}                #A dictionary to store how many of each extension the path have
+    folders1=[]            #A list to store the name of the folders (since they have no extension)
+    cantidades=[]          #A step into making the res dictionary
     for file in folder.iterdir():
-        ext=file.suffix
-        
-        #find the first level of subfolders 
-        if ext=="":
+        ext=file.suffix    #Got the extension
+        if ext=="":        #find the first level of subfolders 
             name=file.stem
             folders1.append(name)
             ext="subfolder"
         cantidades.append(ext)
-
     for i in cantidades:
         res1[i]=cantidades.count(i)
     level1=[]
     for i in folders1:
-        path=way+"/"+i
+        path=way+"/"+i      #Create each of the new paths
         level1.append(path)
     b=[res1, level1]
     return(b)
@@ -49,7 +48,7 @@ first_level_files=a[0]
 first_level_subfolders=a[1]
 
 second_level_files={}
-second_level_files=Counter()
+second_level_files=Counter() #Counter is used to add dictionaries adding the values of the common keys
 second_level_subfolders=[]
 
 for name in first_level_subfolders:
