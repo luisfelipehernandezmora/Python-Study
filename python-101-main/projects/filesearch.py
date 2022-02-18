@@ -16,7 +16,7 @@
 # This program should work for any specified folder on your computer.
 import pathlib
 from collections import Counter
-way="/home/luisfelipe/Coding Nomads/python-101-main"
+way="/home/luisfelipe/Coding Nomads/python-201-main"
 
 #Define the path. Using way variable to able to concatanate strings downwards
 folder=pathlib.Path(way)
