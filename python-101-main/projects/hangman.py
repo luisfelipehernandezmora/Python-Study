@@ -18,7 +18,10 @@ import random
 path=pathlib.Path("/home/luisfelipe/Coding Nomads/python-101-main/projects/English_words.txt")
 with open (path) as file:
     a=file.readlines()
+score=10
 c=[]
+mystery=[]              #Box where the word will be constructed on different attempts
+bank_of_letters=set()   #In this box it will be veryfied if the attempts match the guess
 for word in a:
     if word=="yourself":
         c.append(word)
@@ -28,19 +31,22 @@ for word in a:
     b=word[:-1]
     c.append(b)
 guess=random.choice(c)
-print(guess)
-#find out how many letters have the guess
-largo=len(guess)
-score=10
-mystery=[] #Box where the word will be constructed on different attempts
+guess_hecho_lista=list(guess)
+largo=len(guess)        #find out how many letters have the guess
 for i in range(len(guess)):
     mystery.append("_")
     i=+1
+for char in guess:
+    bank_of_letters.add(char)
 def list_to_str(list):
     mystery_to_show=" ".join(list)
     return(mystery_to_show)
 step_show=list_to_str(mystery)
-step_show
-# while score>0: #this will keep the player limited in tries
-#     tri=input(f"Guess a letter you still have {score} points available")
+indexes=[]
+while score>0:          #Keep the player limited in tries
+    tri=input(f"Guess a letter you still have {score} points available")
+    if tri in bank_of_letters:
+        
+
+
     
