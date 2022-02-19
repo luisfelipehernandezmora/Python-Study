@@ -46,6 +46,7 @@ indexes=[]
 while score>0:          #Keep the player limited in tries
     tri=input(f"Guess a letter you still have {score} points available")
     if tri in bank_of_letters:
+        indexes.index(tri)
         
 
 
