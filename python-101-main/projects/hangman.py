@@ -32,12 +32,15 @@ print(guess)
 #find out how many letters have the guess
 largo=len(guess)
 score=10
-mystery=""
+mystery=[] #Box where the word will be constructed on different attempts
 for i in range(len(guess)):
-    mystery+="_ "
+    mystery.append("_")
     i=+1
-mystery
-
-while score>0: #this will keep the player limited in tries
-    tri=input(f"Guess a letter you still have {score} points available")
+def list_to_str(list):
+    mystery_to_show=" ".join(list)
+    return(mystery_to_show)
+step_show=list_to_str(mystery)
+step_show
+# while score>0: #this will keep the player limited in tries
+#     tri=input(f"Guess a letter you still have {score} points available")
     
