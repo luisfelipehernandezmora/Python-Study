@@ -17,7 +17,7 @@ import pathlib
 import random
 from pprint import pprint
 import requests
-path=pathlib.Path("/home/luisfelipe/Coding Nomads/python-101-main/projects/English_words.txt")
+path=pathlib.Path("/home/luisfelipe/Coding Nomads/python-101-main/projects/hangman_game/English_words.txt")
 with open (path) as file:
     a=file.readlines()
 score=10
