@@ -13,9 +13,10 @@
 #   filled in, e.g.: "_ e _ _ _" if they guessed "e" from "hello"
 # Display a winning message and the full word if they win
 # Display a losing message and quit the game if they don't make it
-from os import sched_param
 import pathlib
 import random
+from pprint import pprint
+import requests
 path=pathlib.Path("/home/luisfelipe/Coding Nomads/python-101-main/projects/English_words.txt")
 with open (path) as file:
     a=file.readlines()
@@ -42,6 +43,14 @@ for char in guess:
 def list_to_str(list):
     mystery_to_show=" ".join(list)
     return(mystery_to_show)
+def translate(word):
+    url="https://dictionaryapi.com/api/v3/references/spanish/json/"+word+"?key=fe594801-4f52-4e7d-9340-4317a163897a"
+    response=requests.get(url).json()[0]
+    definition=response["shortdef"]
+    stem=response["meta"]["stems"]
+    meaning=(f"El significado de la palabra {word} es: {definition}")
+    stem_ans=(f"{word} también tiene palabras derivadas como: {stem}, Estas se pueden usar en un monton de contextos, anotalas y practique oraciones en las que las puede utilizar!")
+    return(meaning,stem_ans)
 intentadas=[]
 cuantas_veces=int()
 while score>0:          #Keep the player limited in tries
@@ -58,6 +67,11 @@ while score>0:          #Keep the player limited in tries
             print(f"Good job! So far you have discovered: {step_show} ")
             if "_" not in mystery:
                 print(f"And congrtulations! Now you have won! with {score} attempts still possible")
+                look=translate(guess)
+                meaning=look[0]
+                stem_ans=look[1]
+                print(meaning)
+                print(stem_ans)
                 quit()
     else:
         score-=1
