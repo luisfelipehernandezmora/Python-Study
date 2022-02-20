@@ -13,6 +13,7 @@
 #   filled in, e.g.: "_ e _ _ _" if they guessed "e" from "hello"
 # Display a winning message and the full word if they win
 # Display a losing message and quit the game if they don't make it
+from os import sched_param
 import pathlib
 import random
 path=pathlib.Path("/home/luisfelipe/Coding Nomads/python-101-main/projects/English_words.txt")
@@ -41,13 +42,25 @@ for char in guess:
 def list_to_str(list):
     mystery_to_show=" ".join(list)
     return(mystery_to_show)
-step_show=list_to_str(mystery)
 indexes=[]
+intentadas=[]
+cuantas_veces=int()
 while score>0:          #Keep the player limited in tries
-    tri=input(f"Guess a letter you still have {score} points available")
+    tri=input(f"Guess a letter you still have {score} points available, so far you have tried {intentadas}")
+    intentadas.append(tri)
     if tri in bank_of_letters:
-        indexes.index(tri)
-        
+        for i in range(len(guess_hecho_lista)):
+            if guess_hecho_lista[i]==tri:
+                indexes.append[i]
+        for x in indexes:
+            mystery[x]=tri
+            step_show=list_to_str(mystery)
+            print(f"Good job! So far you have discovered: {step_show} ")
+            if "_" not in mystery:
+                print(f"And congrtulations! Now you have won! with {score} attempts still possible")
+    else:
+        score-=1
+        print(f"The letter is not in the word! You have {score} attempts left!")
 
 
     
