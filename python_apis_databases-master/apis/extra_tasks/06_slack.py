@@ -24,3 +24,9 @@ Store the links in a JSON file that has the following form:
 """response = client.conversations_info(channel="C0XXXXXXX")
 
 https://stackoverflow.com/questions/66311700/how-read-slack-channel-messages-using-python-slackclient]"""
+import os
+# Import WebClient from Python SDK (github.com/slackapi/python-slack-sdk)
+from slack_sdk import WebClient
+from slack_sdk.errors import SlackApiError
+
+print(os.environ["token"])
