@@ -27,15 +27,14 @@ lista=[]
 lista2=[]
 existing_values=[]
 for i in data:
-    c=i["id"]
-    b=i["name"]
-    e=i["userId"]
-    print(f"Task id: {c} and task: {b} on User id {e}")
-    users["Task_id"]=c
-    users["Task"]=b
-    users["User_id"]=e
+    task_id=i["id"]
+    name=i["name"]
+    user_id=i["userId"]
+    #print(f"Task id: {task_id} and task: {name} on User id {user_id}")
+    users["Task_id"]=task_id
+    users["Task"]=name
+    users["User_id"]=user_id
     lista.append(users)
-    lista2.append(users)
     users={}
 
 #Going in to the DB and create a Table
@@ -54,17 +53,28 @@ metadata.create_all(engine)
 #Now we declare the table just created it
 use_table=sqlalchemy.Table("API_tasks_info_CodNom", metadata, autoload=True, autoload_with=engine)
 
-#Before passing the information, we want to know if the task already exists
+#Here will verify the already existing information, extracted it (if any) and save it somewhere
+tareas_incluidas=sqlalchemy.select([use_table.columns.Task_id])
+result_proxy=conection.execute(tareas_incluidas)
+result_set=result_proxy.fetchall()
+#pprint(result_set)
+for identif in result_set:
+    num=identif[0]
+    existing_values.append(num)
+    existing_values
+
+
+# #Before passing the information, we want to know if the task already exists
 # a=0
 # for elem in lista:
 #     a=elem["Task_id"]
-#     if a in existing_values:
+#     if a in result_set:
 #         lista.remove(elem)
 
 # if len(lista)==0:
 #     print("Nothing to add, all is up-to-date")
 #     quit()
 
-values=lista #We need a list of dictionaries
-query=sqlalchemy.insert(use_table)
-response_proxy=conection.execute(query,values)
+# values=lista #We need a list of dictionaries
+# query=sqlalchemy.insert(use_table)
+# response_proxy=conection.execute(query,values)
