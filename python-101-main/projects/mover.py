@@ -9,7 +9,10 @@
 import pathlib
 folder=pathlib.Path("/home/luisfelipe/Coding Nomads/python-101-main/projects/move_files_from_here")
 destination=pathlib.Path("/home/luisfelipe/Coding Nomads/python-101-main/projects/move_here")
+destination.mkdir(exist_ok=True)
 for files in folder.iterdir():
     ext=files.suffix
-    if ext==".png":
-        print(files)
+    if ext==".PNG":
+        new_name=destination.joinpath(files.name)
+        files.replace(new_name)
+#done
