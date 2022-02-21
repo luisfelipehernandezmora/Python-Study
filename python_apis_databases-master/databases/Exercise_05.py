@@ -56,17 +56,17 @@ use_table=sqlalchemy.Table("API_tasks_info_CodNom", metadata, autoload=True, aut
 tareas_incluidas=sqlalchemy.select([use_table.columns.Task_id])
 result_proxy=conection.execute(tareas_incluidas)
 result_set=result_proxy.fetchall()
-#pprint(result_set)
+
 for identif in result_set:
     num=identif[0]
     existing_values.append(num)
 
 #Before passing the information, we want to know if the task already exists
 a=0
-#for elem in lista:
 proces=True
 x=0
 last=lista[-1]["Task_id"]
+
 while proces:
     a=lista[x]["Task_id"]
     if a in existing_values:
