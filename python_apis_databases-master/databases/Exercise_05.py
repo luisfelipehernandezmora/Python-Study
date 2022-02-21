@@ -24,7 +24,6 @@ response=requests.get(url)
 data=response.json()["data"]
 users={}
 lista=[]
-lista2=[]
 existing_values=[]
 for i in data:
     task_id=i["id"]
@@ -61,20 +60,29 @@ result_set=result_proxy.fetchall()
 for identif in result_set:
     num=identif[0]
     existing_values.append(num)
-    existing_values
 
+#Before passing the information, we want to know if the task already exists
+a=0
+#for elem in lista:
+proces=True
+x=0
+last=lista[-1]["Task_id"]
+while proces:
+    a=lista[x]["Task_id"]
+    if a in existing_values:
+        lista.remove(lista[x])
+    else:
+        x+=1
+    if a==last:
+        proces=False
 
-# #Before passing the information, we want to know if the task already exists
-# a=0
-# for elem in lista:
-#     a=elem["Task_id"]
-#     if a in result_set:
-#         lista.remove(elem)
+if len(lista)==0:
+    print("Nothing to add, all is up-to-date")
+    quit()
 
-# if len(lista)==0:
-#     print("Nothing to add, all is up-to-date")
-#     quit()
+values=lista #We need a list of dictionaries
+query=sqlalchemy.insert(use_table)
+response_proxy=conection.execute(query,values)
 
-# values=lista #We need a list of dictionaries
-# query=sqlalchemy.insert(use_table)
-# response_proxy=conection.execute(query,values)
+print(f"""Well the values that were not in the DB already are: {lista}
+and are the ones included""")
