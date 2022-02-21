@@ -11,7 +11,7 @@ folder=pathlib.Path("/home/luisfelipe/Coding Nomads/python-101-main/projects/mov
 destination=pathlib.Path("/home/luisfelipe/Coding Nomads/python-101-main/projects/move_here")
 destination.mkdir(exist_ok=True)
 for files in folder.iterdir():
-    ext=files.suffix
+    ext=files.suffix    
     if ext==".PNG":
         new_name=destination.joinpath(files.name)
         files.replace(new_name)
