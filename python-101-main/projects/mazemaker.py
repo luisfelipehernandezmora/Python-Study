@@ -26,6 +26,19 @@ def print_maze(maze):
             else:
                 print(Fore.YELLOW,f"{maze[i][j]}",end="")
         print()
+
+def surrounding_wall(rand_wall):
+    s_cell=0
+    if (maze[rand_wall[0]-1][rand_wall[1]]=="c"):
+        s_cell+=1
+    if (maze[rand_wall[0]+1][rand_wall[1]]=="c"):
+        s_cell+=1
+    if (maze[rand_wall[0]][rand_wall[1]-1]=="c"):
+        s_cell+=1
+    if (maze[rand_wall[0]][rand_wall[1]+1]=="c"):
+        s_cell+=1
+    return(s_cell)
+
 width=20
 height=12
 maze=init_maze(width,height)
@@ -63,6 +76,13 @@ while walls:
     #we check if the visited random remaining wall is surrounded by unvisited cells, 4 cases:
     if rand_wall[1]!=0:
         if maze[rand_wall[0]][rand_wall[1]-1]=="u" and maze[rand_wall[0]][rand_wall[1]+1]=="c":
+            s_cells = surrounding_wall(rand_wall)
+            if s_cells < 2:
+                maze[rand_wall[0]][rand_wall[1]] = 'c'
+    
+    
+    
+    
     if rand_wall[1]!=width-1:
         if maze[rand_wall[0]][rand_wall[1]+1]=="u" and maze[rand_wall[0]][rand_wall[1]-1]=="c":
     if rand_wall[0]!=0:
