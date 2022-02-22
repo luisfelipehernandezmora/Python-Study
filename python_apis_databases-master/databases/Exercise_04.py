@@ -13,12 +13,10 @@ BONUS: Make this application something that a user can interact with from the CL
 to let the user decide what tables are going to be created, or what data is going to be inserted.
 The more dynamic the application, the better!
 '''
-
 import sqlalchemy
 import os
 from pprint import pprint
 import sqlalchemy_utils
-
 #Keep your (strong) mysql password safe 
 user=os.environ["username"]
 key=os.environ["mysql_pass"]
