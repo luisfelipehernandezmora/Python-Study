@@ -6,3 +6,16 @@
 #
 # Example input:  1,2,3,4,5,6,7,8,9,10
 # Example output: 2,4,6,8,10,9,7,5,3,1
+
+input2=[]
+output=[]
+while len(input2)<10:
+    ask=input("Tell a number ")
+    input2.append(ask)
+print(f"input: {input2}")
+for i in range(len(input2)):
+    if i<5:
+        output.append(input2[2*i+1])
+    if i>=5:
+        output.append(input2[8-2*i])
+print(f"output: {output}")

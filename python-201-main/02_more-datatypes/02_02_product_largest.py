@@ -8,3 +8,9 @@
 from resources import randlist
 
 print(randlist)
+largest=max(randlist)
+print(largest, "largest")
+prod=1
+for i in randlist:
+    prod=prod*i
+print(prod,"product")

@@ -4,3 +4,13 @@
 # Do you notice any difference to iterating over the string?
 
 string = "codingnomads"
+#iterate over a string
+print("string")
+for i in string:
+    print(i)
+
+print("tuple")
+conver=tuple(string)
+print(conver)
+for i in conver:
+    print(i)
