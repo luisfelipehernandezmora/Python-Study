@@ -4,3 +4,5 @@
 
 s = {1, 2, 3, 4}
 t = {3, 4, 5, 6}
+a=s.intersection(t)
+print(f"The inteserction of the sets {s} and {t} is {a}")
