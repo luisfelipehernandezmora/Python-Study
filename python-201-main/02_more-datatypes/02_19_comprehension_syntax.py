@@ -6,3 +6,5 @@
 # but try to do it using a list comprehension.
 
 word = "codingnomads"
+lista=[char for char in word]
+print(lista)
