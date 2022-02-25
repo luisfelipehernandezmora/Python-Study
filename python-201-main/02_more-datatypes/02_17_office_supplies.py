@@ -22,3 +22,10 @@ office = [
     {"full_name": "Creed Bratton", "item": "mung beans"},
     {"full_name": "Darryl Philbin", "item": "forklift"},
 ]
+for element in office:
+    total_name=element["full_name"].split(" ")
+    name=total_name[0]
+    last_name=total_name[1]
+    item=element["item"]
+    print(f"{last_name}, {name:<15} {item:<20}")
+
