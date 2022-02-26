@@ -18,16 +18,21 @@ for elem in conteo:
 print(dict)
 path_write=pathlib.Path("/home/luisfelipe/Coding Nomads/python-201-main/03_file-input-output/summary_types.csv")
 existente=os.path.isfile("/home/luisfelipe/Coding Nomads/python-201-main/03_file-input-output/summary_types.csv")
+data=[]
+header = sorted(list(dict.keys()))
+for key in header:
+    data.append(dict[key])
+
 if existente==False:
     with open(path_write,"w") as csvfile:
-        header = dict.keys()
-        data=dict.values()
+        # header = dict.keys()
+        # data=dict.values()
         countwriter = csv.writer(csvfile)
         countwriter.writerow(header)
         countwriter.writerow(data)
 else:
     print("yay!")
     with open(path_write,"a") as csvfile:
-        data=dict.values()
+        # data=dict.values()
         countwriter = csv.writer(csvfile)
         countwriter.writerow(data)          
