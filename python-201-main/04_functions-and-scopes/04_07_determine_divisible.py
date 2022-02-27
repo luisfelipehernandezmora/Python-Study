@@ -7,3 +7,12 @@
 # - call your functions, passing in the user input as the arguments,
 #   and set their output equal to new variables 
 # - print your the result variables with descriptive messages
+def is_div(num):
+    desicion=False
+    if num%4==0:
+        desicion=True
+    elif num%7==0:
+        desicion=True
+    else:
+        desicion=False
+    return(desicion)

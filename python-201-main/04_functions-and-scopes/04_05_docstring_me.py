@@ -3,8 +3,16 @@
 # and what it returns.
 
 def km_to_miles(km):
-    """Add your docstring here."""
+    """Function to convert kilometers to miles.
+
+    Args:
+        km: Distance in kilometers.
+        
+    Returns:
+        A Distance in miles.
+        """
     miles = km * 0.6
     return miles
 
 print(km_to_miles.__doc__)
+
