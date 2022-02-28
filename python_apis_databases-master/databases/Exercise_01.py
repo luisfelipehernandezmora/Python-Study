@@ -12,10 +12,10 @@ import os
 user=os.environ["username"]
 key=os.environ["mysql_pass"]
 
-
-engine=sqlalchemy.create_engine('mysql+pymysql://'+user+':'+key+'@localhost/sakila')
-conection=engine.connect()
-metadata=sqlalchemy.MetaData()
-actor=sqlalchemy.Table('actor', metadata, autoload=True, autoload_with=engine)
-print(actor.columns.keys())
+print(user,key)
+# engine=sqlalchemy.create_engine('mysql+pymysql://'+user+':'+key+'@localhost/sakila')
+# conection=engine.connect()
+# metadata=sqlalchemy.MetaData()
+# actor=sqlalchemy.Table('actor', metadata, autoload=True, autoload_with=engine)
+# print(actor.columns.keys())
 

@@ -6,3 +6,8 @@
 # 
 # Then write the necessary code to access and print the values of these
 # two environment variables in this script.
+import os
+
+a=os.environ["ENVIRONMENT"]
+b=os.environ["SECRET"]
+print(a,b)
