@@ -3,3 +3,6 @@
 
 colors = ["neon orange", "spring green"]
 sizes = ["S", "M", "L"]
+
+shop=[(color,size)for color in colors for size in sizes]
+print(shop)

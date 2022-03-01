@@ -12,6 +12,10 @@
 #
 # {0: [0, 0, 0], 1: [0, 0, 1], 2: [0, 1, 0], 3: [0, 1, 1],
 # ..., 7: [1, 1, 1]}
-
+from pprint import pprint
 base = 10
 digits = set(range(base))
+list_num={(x*base**2+y*base**1+z*base**0):[x,y,z] for x in digits for y in digits for z in digits}
+
+pprint(list_num)
+#Honestly I never do these exercise myself, credits to the Python Study group of Coding Nomads
