@@ -49,15 +49,11 @@ if question ==1:
         """
         """
     query=sqlalchemy.Table(name, metadata, 
-        sqlalchemy.Column(cols_names[i],sqlalchemy.Integer()),
+        sqlalchemy.Column(cols_names[0],sqlalchemy.Integer()),
         sqlalchemy.Column(cols_names[1],sqlalchemy.String(255)),
         sqlalchemy.Column(cols_names[2],sqlalchemy.String(255)),
         sqlalchemy.Column(cols_names[3],sqlalchemy.String(255)),
         sqlalchemy.Column(cols_names[4],sqlalchemy.String(255)),
-
-      """  sqlalchemy.Column(cols_names[0],sqlalchemy.Integer()), sqlalchemy.Column(cols_names[1],sqlalchemy.String(255)), sqlalchemy.Column(cols_names[2],sqlalchemy.String(255)),
-        sqlalchemy.Column(cols_names[3],sqlalchemy.String(255)),
-        sqlalchemy.Column(cols_names[4],sqlalchemy.String(255)),"""
     )
     metadata.create_all(engine)
 '2) Insert data to a table'
@@ -75,7 +71,7 @@ if question ==2:
         insertion.append(ask)
         i+=1
     query=sqlalchemy.insert(use_table).values(Id=insertion[0],Name=insertion[1],Email=insertion[2],Phone=insertion[3],City=insertion[4])
-    #query=sqlalchemy.insert(use_table).values(columnas[0]==insertion[0],columnas[1]==insertion[1],columnas[2]==insertion[2],columnas[3]==insertion[3],columnas[4]==insertion[4])
+    #query=sqlalchemy.insert(use_table).values(columnas[0]=insertion[0],columnas[1]=insertion[1],columnas[2]=insertion[2],columnas[3]=insertion[3],columnas[4]=insertion[4])
     result_proxy=conection.execute(query)
 '3) Update data in a table'
 if question ==3:
