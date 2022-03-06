@@ -12,7 +12,15 @@
 # a few objects from it.
 
 class Vegetable():
-    """This datatype for items in a market with two qualities. Name and price"""
+    """This datatype for items in a market with two qualities.
+
+    Args:
+        1st arg: Name of the vegetable
+        2nd arg: Price in the market that day 
+
+    Returns:
+        A Vegetable object with name and price.
+        """
     def __init__(self, name, price):
         self.name=name
         self.price=price
