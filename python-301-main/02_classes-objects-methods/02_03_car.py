@@ -21,10 +21,13 @@ class Car():
         self.model=model
         self.year=year
         self.max_speed=max_speed
+    def __str__(self) -> str:
+        return(f"model: {self.model}, year: {self.year}, max speed: {self.max_speed}")
     def increase_speed(self):
         self.max_speed+=5
 
 beetle=Car("volkswagen beetle",1970,100)
 
 modern=beetle.increase_speed()
-print(f"{modern.max_speed}")
+print(beetle)
+ #Like this is ok?
