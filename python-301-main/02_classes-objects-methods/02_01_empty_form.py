@@ -10,3 +10,26 @@
 #
 # Model such an application form as a Python class below, and instantiate
 # a few objects from it.
+
+class Vegetable():
+    """This datatype for items in a market with two qualities. Name and price"""
+    def __init__(self, name, price):
+        self.name=name
+        self.price=price
+    def __str__(self) -> str:
+        return (f"{self.name}({self.price})")
+    def __repr__(self) -> str:
+        return(f"Vegetable(name={self.name}, price={self.price})")
+
+brocoli=Vegetable("Brocoli",800)
+carrots=Vegetable("carrots",650)
+tomato=Vegetable("tomato",1000)
+plums=Vegetable("plums",2000)
+strawberry=Vegetable("strawberry",2000)
+
+market_list=[brocoli,carrots,tomato,plums,strawberry]
+
+for item in market_list:
+    print(f"In this trip to the shop we have to buy {item.name} and it cost {item.price} CRC")
+        
+
