@@ -22,12 +22,18 @@ class Rectangle():
     def __init__(self,length,width):
         self.length=length
         self.width=width
+
     def __str__(self) -> str:
         return(f"A rectangle to be defined by length and width")
+
+    def __repr__(self) -> str:
+        return(f"Rectangle(length={self.length}, width={self.width})")
+
     def basic_geometry (self):
         area=round(self.length*self.width,2)
         perimeter=round(2*(self.length+self.width),2)
         return(f"The area of the rectangle is {area} \n and the perimeter is {perimeter}")
+    
 
 class Circle():
     """Class to define a circle.
@@ -40,8 +46,13 @@ class Circle():
         """
     def __init__(self,radius):
         self.radius=radius
+
     def __str__(self) -> str:
         return(f"A circle to be defined by it's radius")
+
+    def __repr__(self) -> str:
+        return(f"Circle(radius={self.radius})")
+
     def basic_geometry(self):
         area=round(math.pi*(self.radius)**2,2) 
         perimeter=round(2*math.pi*self.radius,2)

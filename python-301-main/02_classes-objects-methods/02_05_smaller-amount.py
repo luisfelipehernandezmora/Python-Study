@@ -9,7 +9,7 @@
 # print(s)
 # >>> OUTPUT: carrotpea (4)
 
-class Ingredient:
+class Ingrediente:
     """Models a food item used as an ingredient."""
 
     def __init__(self, name, amount):
@@ -24,7 +24,11 @@ class Ingredient:
     def __add__(self, other):
         """Combines two ingredients."""
         new_name = self.name + other.name
-        return Ingredient(name=new_name, amount=1)
+        if self.amount<other.amount:
+            new=self.amount
+        else:
+            new=other.amount
+        return Ingrediente(name=new_name, amount=new)
     
     def __str__(self):
         return f"{self.name} ({self.amount})"
@@ -34,7 +38,7 @@ class Ingredient:
 
 
 if __name__ == '__main__':
-    c = Ingredient("carrot", 5)
-    p = Ingredient("pea", 4)
+    c = Ingrediente("carrot", 5)
+    p = Ingrediente("pea", 4)
     s = c + p
     print(s)
