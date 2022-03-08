@@ -10,9 +10,7 @@
 # Be creative. Have some fun. :)
 # Using objects you can model anything you want:
 # Animals, paintings, card games, sports teams, trees, people etc...
-from turtle import update
 import requests
-from pprint import pprint
 class Countries():
     """Class to define a country object and qualities asociate with it
 
@@ -23,7 +21,7 @@ class Countries():
         4th arg: language     
                 
     Returns:
-        A list of information of the country in order: [name, population, area, language]
+        A country object with information of the countries in order: [name, population, area, language]
         """
     def __init__(self, name, population, territory, language):
         self.name=name
@@ -38,11 +36,11 @@ class Countries():
         return(f"Country(name = {self.name}, population = {self.population} millions, territory = {self.territory} km2, languages = {self.language})")
         
     def __add__(self, other):
-        new_population=self.population+other.population
+        new_name=self.name+" and "+other.name
+        new_population=round(self.population+other.population,2)
         new_territory=self.territory+other.territory
-        new_language=update(self.language,other.language)
-        return(Countries(name=f"The union of those 2 countries is like:", population=new_population, territory=new_territory, language=new_language))
-
+        new_language=dict(self.language,**other.language)
+        return(Countries(name=f"The union of {new_name}", population=new_population, territory=new_territory, language=new_language))
 
 url="https://restcountries.com/v3.1"
 
@@ -77,9 +75,75 @@ union1=country1+country2
 union2=country3+country2
 paises=[country1,country2,country3]
 
+print(country1,"\n")
+print(country2,"\n")
+print(country3,"\n")
+print(union1,"\n")
+print(union2,"\n")
 
-print(country1)
-print(country2)
-print(country3)
-print(union1)
-print(union2)
+class Menu():
+    """Class to define Menu items of a restaurant
+
+    Args:
+        1st arg: name
+        2nd arg: veg or non veg 
+        3rd arg: calories
+        4th arg: price     
+                
+    Returns:
+        A list of information of the country in order: [name, veg/non veg, calories, price]
+        """  
+    def __init__(self, name, type, calorie, price):
+        self.name=name
+        self.type=type
+        self.calorie=calorie
+        self.price=price
+    
+    def __str__(self) -> str:
+        return(f"Menu({self.name} {self.type} {self.calorie} {self.price})")
+    
+    def __str__(self) -> str:
+        return(f"Menu(Name = {self.name}, Type = {self.type}, Calorie content = {self.calorie}, Price = {self.price})")
+    
+    def __add__(self,other):
+        new_name=f"{self.name} \n {other.name}"
+        if self.type or other.type == "Non Veg":
+            new_type="Non Veg"
+        else:
+            new_type="Vegetarian!"
+        new_calorie=self.calorie+other.calorie
+        new_price=self.price+other.price
+        return(Menu(name=new_name, type=new_type, calorie=new_calorie, price=new_price))
+
+    def create_item(item,type,calorie,price):
+        """Function to introduce Menu items
+
+        Args:
+            1st arg: name
+            2nd arg: veg or non veg 
+            3rd arg: calories
+            4th arg: price     
+                    
+        Returns:
+        A list of information of the country in order: [name, veg/non veg, calories, price]
+        """ 
+        # item=input("What is the name of the item you want to create in the menu?")
+        # type=input("Vegetarian or Non Veg?")
+        # calorie=int(input("How many calories it have?"))
+        # price=int(input("Price?"))
+        return(Menu(item,type,calorie,price))
+
+pancakes=Menu.create_item("Banana pancakes","Veg",300,3)
+best_coffee=Menu.create_item("The best coffe in town","Veg",20,1.50)
+sandwich=Menu.create_item("Kid's meal","Non Veg",300,4)
+fruits=Menu.create_item("Fresh season fruit","Veg",200,3.75)
+
+breakfast1=pancakes+best_coffee+fruits
+breakfast2=sandwich+best_coffee+fruits
+
+print(pancakes,"\n")
+print(best_coffee,"\n")
+print(sandwich,"\n")
+print(fruits,"\n")
+print(breakfast1,"\n")
+print(breakfast2,"\n")
