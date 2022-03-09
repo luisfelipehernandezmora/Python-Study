@@ -11,6 +11,7 @@
 # - Display messages that explain who won or lost a battle
 # - If a Pokemon loses a battle, they lose some of their `hp`
 # - If you call the `feed()` method on a Pokemon, they regain some `hp`
+import random
 class Pokemon:
     """Class to create Pokemons
 
@@ -32,35 +33,59 @@ class Pokemon:
     
     def feed(self):
         if self.hp<self.max_hp/2 :
-            self.hp+=10
+            self.hp+=self.max_hp*0.1
         else:
-            self.hp+=5
+            self.hp+=self.max_hp*0.05
+        if self.hp>=self.max_hp:
+            self.hp=self.max_hp
         return(f"Good meal! Your current hp is {self.hp}/{self.max_hp}")
-
+        
     def attack(self,other):
-        damage=self.hp*0.1
+        damage=self.max_hp*0.1*random.randrange(1,4)
         if self.type=="water" and other.type=="fire":
-            real_damage=damage*1.5
+            real_damage=damage*1.2
         elif self.type=="water" and other.type=="grass":
-            real_damage=damage*0.5
+            real_damage=damage*0.8
         elif self.type=="water" and other.type=="water":
             real_damage=damage
         elif self.type=="fire" and other.type=="fire":
             real_damage=damage
         elif self.type=="fire" and other.type=="grass":
-            real_damage=damage*1.5
+            real_damage=damage*1.2
         elif self.type=="fire" and other.type=="water":
-            real_damage=damage*0.5
+            real_damage=damage*0.8
         elif self.type=="grass" and other.type=="fire":
-            real_damage=damage*0.5
+            real_damage=damage*0.8
         elif self.type=="grass" and other.type=="grass":
             real_damage=damage
         elif self.type=="grass" and other.type=="water":
-            real_damage=damage*1.5
+            real_damage=damage*1.2
+        other.hp-=real_damage
+        print(f"{self.name} attacking with: {real_damage}")
         return(real_damage)
+    def battle(self,other):
+        i=1
+        while self.hp>0 and other.hp>0:
+            if i%2==0:
+                self.attack(other)
+            else:
+                other.attack(self)
+            print(self.name,self.hp)
+            print(other.name,other.hp,"\n")
+            i+=1
+        if self.hp<=0:
+            other.max_hp+=2
+            other.hp+=4
+            msj=f"Excellent {other.name}! you won the battle and you receive some health booster \n New health {other.hp} and New health max {other.max_hp} keep rocking!"
+        elif other.hp<=0:
+            self.max_hp+=2
+            self.hp+=4
+            msj=f"Excellent {self.name}! you won the battle and you receive some health booster \n New health {self.hp} and New health max {self.max_hp} keep rocking!"
+        return(msj)
 
-Bulbasur=Pokemon("Bulbasur", "grass", 30, 30)
+Bulbasur=Pokemon("Bulbasur", "grass", 25, 25)
 Flareon=Pokemon("Flareon", "fire", 25, 25)
-Squirtle=Pokemon("Squirtle", "water", 27, 27)
+Squirtle=Pokemon("Squirtle", "water", 25, 25)
 
-print(Bulbasur)
+a=Squirtle.battle(Flareon)
+print(a,Squirtle,Flareon)
