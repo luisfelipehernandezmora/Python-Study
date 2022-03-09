@@ -35,3 +35,32 @@ class Pokemon:
             self.hp+=10
         else:
             self.hp+=5
+        return(f"Good meal! Your current hp is {self.hp}/{self.max_hp}")
+
+    def attack(self,other):
+        damage=self.hp*0.1
+        if self.type=="water" and other.type=="fire":
+            real_damage=damage*1.5
+        elif self.type=="water" and other.type=="grass":
+            real_damage=damage*0.5
+        elif self.type=="water" and other.type=="water":
+            real_damage=damage
+        elif self.type=="fire" and other.type=="fire":
+            real_damage=damage
+        elif self.type=="fire" and other.type=="grass":
+            real_damage=damage*1.5
+        elif self.type=="fire" and other.type=="water":
+            real_damage=damage*0.5
+        elif self.type=="grass" and other.type=="fire":
+            real_damage=damage*0.5
+        elif self.type=="grass" and other.type=="grass":
+            real_damage=damage
+        elif self.type=="grass" and other.type=="water":
+            real_damage=damage*1.5
+        return(real_damage)
+
+Bulbasur=Pokemon("Bulbasur", "grass", 30, 30)
+Flareon=Pokemon("Flareon", "fire", 25, 25)
+Squirtle=Pokemon("Squirtle", "water", 27, 27)
+
+print(Bulbasur)
