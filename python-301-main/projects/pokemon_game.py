@@ -63,9 +63,16 @@ class Pokemon:
         other.hp-=real_damage
         print(f"{self.name} attacking with: {real_damage}")
         return(real_damage)
+    
     def battle(self,other):
         i=1
         while self.hp>0 and other.hp>0:
+            if i%5==0:
+                ask=input("You want to feed both pokemons? Yes/No ")
+                if ask=="Yes":
+                    self.feed()
+                    other.feed()
+                print(f"Good meal! Now {self.name} is {self.hp} and {other.name} is {other.hp}")
             if i%2==0:
                 self.attack(other)
             else:
@@ -76,10 +83,16 @@ class Pokemon:
         if self.hp<=0:
             other.max_hp+=2
             other.hp+=4
+            self.hp=0
+            if other.hp>=other.max_hp:
+                other.hp=other.max_hp
             msj=f"Excellent {other.name}! you won the battle and you receive some health booster \n New health {other.hp} and New health max {other.max_hp} keep rocking!"
         elif other.hp<=0:
             self.max_hp+=2
             self.hp+=4
+            other.hp=0
+            if self.hp>=self.max_hp:
+                self.hp=self.max_hp
             msj=f"Excellent {self.name}! you won the battle and you receive some health booster \n New health {self.hp} and New health max {self.max_hp} keep rocking!"
         return(msj)
 
@@ -88,4 +101,4 @@ Flareon=Pokemon("Flareon", "fire", 25, 25)
 Squirtle=Pokemon("Squirtle", "water", 25, 25)
 
 a=Squirtle.battle(Flareon)
-print(a,Squirtle,Flareon)
+print(a)
