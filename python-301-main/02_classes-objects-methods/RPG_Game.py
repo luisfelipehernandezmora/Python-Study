@@ -38,10 +38,12 @@ class Hero():
         print(f"So you want to run? Only if you guess correctly the math operation you can proceed")
         a=random.randint(5,15)
         b=random.randint(12,19)
+        d=count_down()
         c=int(input(f"What is the result of {a}x{b}? "))
-        # d=count_down()
-        # if d==False:
-        #     print(f"Oh You run out of time, you have to be sharper and quicker")
+        #d=count_down()
+
+        if d==False:
+            print(f"Oh You run out of time, you have to be sharper and quicker")
         if a*b==c:
             print(f"Oh right! at least you are studying, ok fine, go!")
 
