@@ -43,25 +43,3 @@ class Spice(Ingredient):
             print(f"Your {self.name} is expired, probably still good to use")
             self.name="old"+self.name
 
-lentils=Spice("Lentils",5, "salty")
-lentils.expire()
-
-
-if __name__=="main":
-
-    papas=Ingredient("potatoes",5)
-    cookies=Ingredient("cookies",2)
-    water=Ingredient("Special water",3)
-    zanahorias=papas+cookies
-    print("",papas.name,papas.amount,"\n",cookies.name,cookies.amount,"\n",water.name,water.amount,"\n",zanahorias.name,zanahorias.amount)
-    print(papas)
-    print(zanahorias)
-
-mushrooms=Ingredient("Portobelo", 10)
-cinnammon=Spice("Cinamon",1, "kind of sweet")
-#salt=Spice("salt",2)
-salt=Ingredient("salt",2)
-mushrooms.expire()
-a=cinnammon.taste
-salt.expire()
-print(a)
