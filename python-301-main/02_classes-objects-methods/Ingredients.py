@@ -31,6 +31,10 @@ class Ingredient:
 class Spice(Ingredient):
     """Model a spice to flavor the food!"""
 
+    def __init__(self, name, amount, taste):
+        super().__init__(name, amount)
+        self.taste=taste
+
     def expire(self):
         if self.name=="salt":
             print(f"Nonono, salt don't expire")
@@ -39,9 +43,9 @@ class Spice(Ingredient):
             print(f"Your {self.name} is expired, probably still good to use")
             self.name="old"+self.name
 
-lentils=Spice("Lentils",5)
+lentils=Spice("Lentils",5, "salty")
 lentils.expire()
-print(lentils)
+
 
 if __name__=="main":
 
@@ -54,9 +58,10 @@ if __name__=="main":
     print(zanahorias)
 
 mushrooms=Ingredient("Portobelo", 10)
-cinnammon=Spice("Cinamon",1)
+cinnammon=Spice("Cinamon",1, "kind of sweet")
 #salt=Spice("salt",2)
 salt=Ingredient("salt",2)
 mushrooms.expire()
-cinnammon.expire()
+a=cinnammon.taste
 salt.expire()
+print(a)
