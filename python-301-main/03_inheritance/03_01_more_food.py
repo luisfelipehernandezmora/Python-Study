@@ -41,10 +41,24 @@ class Bread(Ingredient):
         self.oven=oven
         self.gluten_free=gluten_free
 
+    def expire(self):
+        print(f"Smeel your {self.name} it might be getting moldy \n")
+        self.name="moldy"+self.name
+
     def bake(self,):
         if self.gluten_free==True:
             print(f"Your {self.name} gluten free bread needs {self.oven} minutes to be baked")
         else:
             print(f"Your {self.name} bread needs {self.oven} minutes to be baked. And beware, it have gluten!")
 
-centeno=Bread("Centeno")
+
+if __name__ == '__main__':
+    centeno=Bread("Centeno", 5, 12, False)
+    normal=Bread("Baguete", 5, 10, False)
+    brown=Bread("Brown bread", 5, 7, True)
+
+    breads=[centeno,normal, brown]
+    for i in breads:
+        i.bake()
+        i.expire()
+    
