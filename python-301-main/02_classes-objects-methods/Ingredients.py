@@ -29,14 +29,22 @@ class Ingredient:
         webbrowser.open(url, new=0, autoraise=True)
 
 class Spice(Ingredient):
+    """Model a spice to flavor the food!"""
 
-    pass
+    def expire(self):
+        if self.name=="salt":
+            print(f"Nonono, salt don't expire")
+            return(None)
+        elif self.name !="salt":
+            print(f"Your {self.name} is expired, probably still good to use")
+            self.name="old"+self.name
 
 lentils=Spice("Lentils",5)
 lentils.expire()
 print(lentils)
 
 if __name__=="main":
+
     papas=Ingredient("potatoes",5)
     cookies=Ingredient("cookies",2)
     water=Ingredient("Special water",3)
@@ -44,3 +52,11 @@ if __name__=="main":
     print("",papas.name,papas.amount,"\n",cookies.name,cookies.amount,"\n",water.name,water.amount,"\n",zanahorias.name,zanahorias.amount)
     print(papas)
     print(zanahorias)
+
+mushrooms=Ingredient("Portobelo", 10)
+cinnammon=Spice("Cinamon",1)
+#salt=Spice("salt",2)
+salt=Ingredient("salt",2)
+mushrooms.expire()
+cinnammon.expire()
+salt.expire()
