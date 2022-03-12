@@ -12,3 +12,10 @@
 #
 # - A `Vehicle()` parent class, with `Truck()` and `Motorcycle()` child classes.
 # - A `Restaurant()` parent class, with `Gourmet()` and `FastFood()` child classes.
+
+from cinema import *
+
+class (Action_movie)
+
+
+

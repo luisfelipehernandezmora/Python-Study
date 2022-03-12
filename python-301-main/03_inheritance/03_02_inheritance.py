@@ -43,9 +43,6 @@ class RomCom(Movie):
         super().__init__(title, year, price)
         print(f"{self.title} is a movie from the Romantic/Comedy gender from the year {self.year}")
     
-# a=RomCom("test movie", 2001, 2.3)
-# print(a.rent())
-
 class Action_movie(Movie):
     """Defines an Action movie! """
 
@@ -54,4 +51,7 @@ class Action_movie(Movie):
         self.pg=pg
         print(self.pg)
 
-Batman=Action_movie("Batman", 2001, 2)
+if __name__=="__main__":
+    a=RomCom("test movie", 2001, 2.3)
+    print(a.rent())
+    Batman=Action_movie("Batman", 2001, 2)
