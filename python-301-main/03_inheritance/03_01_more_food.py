@@ -2,7 +2,6 @@
 # the code you wrote yourself, or continue working with the one provided below.
 # Implement at least one extra method for your child class, and override the
 # `expire()` method from the parent `Ingredient()` class.
-
 class Ingredient:
     """Models an Ingredient."""
 
@@ -25,3 +24,27 @@ class Spice(Ingredient):
     def grind(self):
         print(f"You have now {self.amount} of ground {self.name}.")
 
+class Bread(Ingredient):
+    """A Method to define Bread types and their cares for cooking
+
+    Args:
+        1st arg: Name of the bread
+        2nd arg: Amount available
+        3rd arg: Minutes in the oven
+        4th arg: Gluten free or not
+
+    Returns:
+        A Vegetable object with name and price.
+        """
+    def __init__(self, name, amount, oven, gluten_free):
+        super().__init__(name, amount)
+        self.oven=oven
+        self.gluten_free=gluten_free
+
+    def bake(self,):
+        if self.gluten_free==True:
+            print(f"Your {self.name} gluten free bread needs {self.oven} minutes to be baked")
+        else:
+            print(f"Your {self.name} bread needs {self.oven} minutes to be baked. And beware, it have gluten!")
+
+centeno=Bread("Centeno")
