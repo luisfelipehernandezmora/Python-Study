@@ -13,16 +13,6 @@
 # - A `Vehicle()` parent class, with `Truck()` and `Motorcycle()` child classes.
 # - A `Restaurant()` parent class, with `Gourmet()` and `FastFood()` child classes.
 
-from cinema import *
 
-class Dim_3(Action_movie):
-    """Creates a 3d an action movie with 3d cinema rooms features"""
-    def __init__(self, title, year, price, language, audio, pg=13):
-        super().__init__(title, year, price, language, audio, pg)
-        self.language=language
-        self.audio=audio
-    
-    def special_sound(self):
-        print(f"The special audio format and effects of your movie is {self.audio}")
     
 
