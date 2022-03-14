@@ -63,7 +63,7 @@ class Soup:
         """
         for ing in ingredients:
             lista=list.append(ing)
-        
+        a=
 
 
 # def look_recipe(lista):
