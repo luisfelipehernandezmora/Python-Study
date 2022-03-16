@@ -53,17 +53,17 @@ class Soup:
     def __str__(self) -> str:
         return(f"Soup({self.name})")
 
-    def cook(self, *ingredients):
-        """Takes Ingredients and Spices to cook a soup
+    # def cook(self, *ingredients):
+    #     """Takes Ingredients and Spices to cook a soup
 
-        Args:
-            args: Ingredients for the soup, as many as needed
+    #     Args:
+    #         args: Ingredients for the soup, as many as needed
 
-        return: The possible recipes to cook with those ingredients, the amount of people who can eat 
-        """
-        for ing in ingredients:
-            lista=list.append(ing)
-        a=
+    #     return: The possible recipes to cook with those ingredients, the amount of people who can eat 
+    #     """
+    #     for ing in ingredients:
+    #         lista=list.append(ing)
+            
 
 
 # def look_recipe(lista):
