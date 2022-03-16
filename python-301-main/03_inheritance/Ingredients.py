@@ -64,8 +64,15 @@ class Soup:
     #     for ing in ingredients:
     #         lista=list.append(ing)
             
+#url="https://api.spoonacular.com/recipes/findByIngredients?apiKey=f1727df4f2004de98168f2021f8f3c87&ingredients=apples,+flour,+sugar&number=2"
 
+def look_recipe(lista):
+    for ing in lista:
+        url="https://api.spoonacular.com/recipes/findByIngredients?apiKey=My_key_here&ingredients="+ing+",+"
+      
+    url=url+"&number=3"
+    return(url)
+        
 
-# def look_recipe(lista):
-
-#     url="https://api.spoonacular.com/recipes/findByIngredients?apiKey=f1727df4f2004de98168f2021f8f3c87&ingredients=apples,+flour,+sugar&number=2"
+lista=["apples", "flour", "sugar"]
+print(look_recipe(lista))
