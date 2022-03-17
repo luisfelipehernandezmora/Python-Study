@@ -7,5 +7,6 @@ folder="/home/luisfelipe/Coding Nomads/python-301-main/03_inheritance/sample.jso
 with open(folder,"r") as file:
     recipe=json.load(file)[0]
     title=recipe["title"]
-pprint(recipe)
+    
+#pprint(recipe)
 print(title)
