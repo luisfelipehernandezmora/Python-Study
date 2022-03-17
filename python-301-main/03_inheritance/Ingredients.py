@@ -1,5 +1,7 @@
 import webbrowser
 import requests
+from pprint import pprint
+import json
 class Ingredient:
     """Models the food item as an ingredient"""
     def __init__(self,name, amount):
@@ -67,12 +69,21 @@ class Soup:
 #url="https://api.spoonacular.com/recipes/findByIngredients?apiKey=f1727df4f2004de98168f2021f8f3c87&ingredients=apples,+flour,+sugar&number=2"
 
 def look_recipe(lista):
+    #Create the url link based on your ingredients
+    url="https://api.spoonacular.com/recipes/findByIngredients?apiKey=f1727df4f2004de98168f2021f8f3c87&ingredients="
     for ing in lista:
-        url="https://api.spoonacular.com/recipes/findByIngredients?apiKey=My_key_here&ingredients="+ing+",+"
-      
-    url=url+"&number=3"
-    return(url)
-        
-
+       url+=ing+",+"
+    url=url[:-2]
+    url=url+"&number=1" #Get this amount of recipes
+    
+    recipes=requests.get(url).json()
+    return(recipes)
+    
 lista=["apples", "flour", "sugar"]
-print(look_recipe(lista))
+
+recipes=look_recipe(lista)
+pprint(recipes)
+json_object=json.dumps(recipes,indent=4)
+
+with open("sample.json","w") as outfile:
+    outfile.write(json_object)
