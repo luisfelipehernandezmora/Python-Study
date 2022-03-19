@@ -74,12 +74,12 @@ def look_recipe(lista):
     for ing in lista:
        url+=ing+",+"
     url=url[:-2]
-    url=url+"&number=1" #Get this amount of recipes
+    url=url+"&number=5" #Get this amount of recipes
     
     recipes=requests.get(url).json()
     return(recipes)
     
-lista=["apples", "flour", "sugar"]
+lista=["bananas", "peanuts", "oats", "milk", "yogurt", "strawberries", "cacao powder"]
 
 recipes=look_recipe(lista)
 pprint(recipes)
