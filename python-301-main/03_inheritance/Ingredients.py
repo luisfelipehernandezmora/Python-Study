@@ -85,10 +85,13 @@ lista=["bananas", "peanuts", "oats", "milk", "yogurt", "strawberries", "cacao po
 lista2=["papaya", "milk", "oats", "granola", "cereal", "strawberries", "coffee"]
 lista3=["eggs", "bread", "tomato", "mushrooms", "coffee", "strawberries", "cinamon"]
 
-recipes=look_recipe(lista3)
+recipes=look_recipe(lista2)
 pprint(recipes)
 json_object=json.dumps(recipes,indent=4)
 
 folder="/home/luisfelipe/Coding Nomads/python-301-main/03_inheritance/sample.json"
 with open(folder,"w") as outfile:
     outfile.write(json_object)
+
+banana=Ingredient("bananas",2)
+print(banana.get_info())
