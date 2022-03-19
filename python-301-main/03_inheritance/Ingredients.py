@@ -2,6 +2,7 @@ import webbrowser
 import requests
 from pprint import pprint
 import json
+import os
 class Ingredient:
     """Models the food item as an ingredient"""
     def __init__(self,name, amount):
@@ -66,11 +67,12 @@ class Soup:
     #     for ing in ingredients:
     #         lista=list.append(ing)
             
-#url="https://api.spoonacular.com/recipes/findByIngredients?apiKey=f1727df4f2004de98168f2021f8f3c87&ingredients=apples,+flour,+sugar&number=2"
+#url="https://api.spoonacular.com/recipes/findByIngredients?apiKey=key&ingredients=apples,+flour,+sugar&number=2"
 
 def look_recipe(lista):
     #Create the url link based on your ingredients
-    url="https://api.spoonacular.com/recipes/findByIngredients?apiKey=f1727df4f2004de98168f2021f8f3c87&ingredients="
+    key=os.environ["keyspoon"]
+    url="https://api.spoonacular.com/recipes/findByIngredients?apiKey="+key+"&ingredients="
     for ing in lista:
        url+=ing+",+"
     url=url[:-2]
@@ -80,10 +82,13 @@ def look_recipe(lista):
     return(recipes)
     
 lista=["bananas", "peanuts", "oats", "milk", "yogurt", "strawberries", "cacao powder"]
+lista2=["papaya", "milk", "oats", "granola", "cereal", "strawberries", "coffee"]
+lista3=["eggs", "bread", "tomato", "mushrooms", "coffee", "strawberries", "cinamon"]
 
-recipes=look_recipe(lista)
+recipes=look_recipe(lista3)
 pprint(recipes)
 json_object=json.dumps(recipes,indent=4)
 
-with open("sample.json","w") as outfile:
+folder="/home/luisfelipe/Coding Nomads/python-301-main/03_inheritance/sample.json"
+with open(folder,"w") as outfile:
     outfile.write(json_object)
