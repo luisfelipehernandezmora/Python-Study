@@ -3,6 +3,9 @@ import requests
 from pprint import pprint
 import json
 import os
+key=os.environ["keyspoon"]
+#url="https://api.spoonacular.com/recipes/findByIngredients?apiKey=key&ingredients=apples,+flour,+sugar&number=2"
+
 class Ingredient:
     """Models the food item as an ingredient"""
     def __init__(self,name, amount):
@@ -47,27 +50,30 @@ class Spice(Ingredient):
             print(f"Your {self.name} is expired, probably still good to use")
             self.name="old"+self.name
 
-class Soup:
+class Soup(Ingredient):
     "Creates a Soup from the given Ingredients"
 
-    def __init__(self,name) :
-        self.name=name
+    # def __init__(self,name) :
+    #     self.name=name
 
-    def __str__(self) -> str:
-        return(f"Soup({self.name})")
+    # def __str__(self) -> str:
+    #     return(f"Soup({self.name})")
 
-    # def cook(self, *ingredients):
-    #     """Takes Ingredients and Spices to cook a soup
+    def cook(self, *ingredients):
+        """Takes Ingredients and Spices to cook a soup
 
-    #     Args:
-    #         args: Ingredients for the soup, as many as needed
+        Args:
+            args: Ingredients for the soup, as many as needed
 
-    #     return: The possible recipes to cook with those ingredients, the amount of people who can eat 
-    #     """
-    #     for ing in ingredients:
-    #         lista=list.append(ing)
+        return: The possible recipes to cook with those ingredients, the amount of people who can eat 
+        """
+        list_of_food=[]
+        for ing in ingredients:
+            ing=self.name
+            list_of_food.append(ing)
+
+        recipes=look_recipe(list_of_food)
             
-#url="https://api.spoonacular.com/recipes/findByIngredients?apiKey=key&ingredients=apples,+flour,+sugar&number=2"
 
 def look_recipe(lista):
     #Create the url link based on your ingredients
@@ -81,9 +87,36 @@ def look_recipe(lista):
     recipes=requests.get(url).json()
     return(recipes)
     
-lista=["bananas", "peanuts", "oats", "milk", "yogurt", "strawberries", "cacao powder"]
-lista2=["papaya", "milk", "oats", "granola", "cereal", "strawberries", "coffee"]
-lista3=["eggs", "bread", "tomato", "mushrooms", "coffee", "strawberries", "cinamon"]
+def get_recipe():
+    """Looks up in json created to extract 
+
+    Args:
+        None, it uses an specific file
+
+    return: The possible recipes to cook with those ingredients, the amount of people who can eat 
+    """
+    folder="/home/luisfelipe/Coding Nomads/python-301-main/03_inheritance/sample.json"
+    with open(folder,"r") as file: #Reads the json file already done (to minimize multiple unnecesary callings)
+        recipe=json.load(file)
+
+    ids=[]
+    for i in range (5): #Maps the recipes availables and Id number
+        title=recipe[i]["title"]
+        recipe_id=recipe[i]["id"]
+        ids.append(recipe_id)
+        print(f"This recipe is called {title} and have the id {recipe_id}")
+
+    ask_id=int(input(f"Oh right! tell me the id of that recipe \n")) #The user choose which recipe to look upon
+    if ask_id in ids:
+        #https://api.spoonacular.com/recipes/782619/information?apiKey=f1727df4f2004de98168f2021f8f3c87&includeNutrition=false
+        url="https://api.spoonacular.com/recipes/"+str(ask_id)+"/information?apiKey="+key+"&includeNutrition=false"
+        pasos=requests.get(url).json()["instructions"]
+        site=requests.get(url).json()["sourceUrl"]
+        print(pasos,"\n")
+        print("Voila Bonne Apettite you have now the full steps on how to proceed, salud! \n also let me open the webpage for you ... \n")
+        webbrowser.open(site, new=0, autoraise=True)
+
+        
 
 # recipes=look_recipe(lista)
 # pprint(recipes)
@@ -94,5 +127,14 @@ lista3=["eggs", "bread", "tomato", "mushrooms", "coffee", "strawberries", "cinam
 #     outfile.write(json_object)
 
 banana=Ingredient("bananas",2)
-print(banana.get_info())
+fresas=Ingredient("fresas",4)
+oats=Ingredient("oats",1)
+milk=Ingredient("milk",3)
+
+
+
+
+# lista=["bananas", "peanuts", "oats", "milk", "yogurt", "strawberries", "cacao powder"]
+# lista2=["papaya", "milk", "oats", "granola", "cereal", "strawberries", "coffee"]
+# lista3=["eggs", "bread", "tomato", "mushrooms", "coffee", "strawberries", "cinamon"]
 

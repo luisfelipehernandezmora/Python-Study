@@ -37,11 +37,7 @@ if ask == "Yes":
         print(pasos,"\n")
         print("Voila Bonne Apettite you have now the full steps on how to proceed, salud! \n also let me open the webpage for you ... \n")
         webbrowser.open(site, new=0, autoraise=True)
-
-
-        
-
-
 else:
     print(f"ok, you have the recipes, just come back whenever you want ")
     
+#url="https://api.spoonacular.com/recipes/findByIngredients?apiKey=key&ingredients=apples,+flour,+sugar&number=2"
