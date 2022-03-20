@@ -4,7 +4,6 @@ from pprint import pprint
 import json
 import os
 key=os.environ["keyspoon"]
-#url="https://api.spoonacular.com/recipes/findByIngredients?apiKey=key&ingredients=apples,+flour,+sugar&number=2"
 
 class Ingredient:
     """Models the food item as an ingredient"""
@@ -108,7 +107,6 @@ def get_recipe():
 
     ask_id=int(input(f"Oh right! tell me the id of that recipe \n")) #The user choose which recipe to look upon
     if ask_id in ids:
-        #https://api.spoonacular.com/recipes/782619/information?apiKey=f1727df4f2004de98168f2021f8f3c87&includeNutrition=false
         url="https://api.spoonacular.com/recipes/"+str(ask_id)+"/information?apiKey="+key+"&includeNutrition=false"
         pasos=requests.get(url).json()["instructions"]
         site=requests.get(url).json()["sourceUrl"]

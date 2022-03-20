@@ -30,7 +30,6 @@ ask=input(f"You want to look for any of these recipes procedures? ") #This secti
 if ask == "Yes":
     ask_id=int(input(f"Oh right! tell me the id of that recipe \n")) #The user choose which recipe to look upon
     if ask_id in ids:
-        #https://api.spoonacular.com/recipes/782619/information?apiKey=f1727df4f2004de98168f2021f8f3c87&includeNutrition=false
         url="https://api.spoonacular.com/recipes/"+str(ask_id)+"/information?apiKey="+key+"&includeNutrition=false"
         pasos=requests.get(url).json()["instructions"]
         site=requests.get(url).json()["sourceUrl"]
@@ -41,3 +40,4 @@ else:
     print(f"ok, you have the recipes, just come back whenever you want ")
     
 #url="https://api.spoonacular.com/recipes/findByIngredients?apiKey=key&ingredients=apples,+flour,+sugar&number=2"
+#https://api.spoonacular.com/recipes/782619/information?apiKey=f1727df4f2004de98168f2021f8f3c87&includeNutrition=false
