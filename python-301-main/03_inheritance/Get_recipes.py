@@ -19,7 +19,7 @@ for i in range (5): #Maps the recipes availables and Id number
     cooking_book[recipe_id]=title
     ids.append(recipe_id)
     print(f"This recipe is called {title} and have the id {recipe_id}")
-    for i in range(len(missed_ingredients)):
+    for i in range(len(missed_ingredients)): #not implememented yet
         missed=missed_ingredients[i]["name"]
         #print(f"missed {missed}")
     for i in range(len(used_ingredients)):
@@ -41,3 +41,8 @@ else:
     
 #url="https://api.spoonacular.com/recipes/findByIngredients?apiKey=key&ingredients=apples,+flour,+sugar&number=2"
 #https://api.spoonacular.com/recipes/782619/information?apiKey=f1727df4f2004de98168f2021f8f3c87&includeNutrition=false
+from Ingredients import *
+banana=Ingredient("bananas",2)
+fresas=Ingredient("fresas",4)
+oats=Ingredient("oats",1)
+milk=Ingredient("milk",3)
