@@ -18,4 +18,8 @@ soup=BeautifulSoup(page,features="html.parser")
 #print(soup.prettify)
 #print(soup)
 title=soup.find("h1",class_="title").text
-print(title)
+author=soup.find("p",class_="author").text
+body=soup.find("div",class_="md").text
+# print(f"The recipe in this link is {title} \n")
+# print(f"Created {author} \n")
+# print(f"And the steps to cook are \n {body} \n")
