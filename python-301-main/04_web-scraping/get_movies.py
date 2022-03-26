@@ -1,3 +1,6 @@
+"""The aim of these file is to show how to make an HTTP 
+request and dump it into a json file for enquiry later"""
+
 import requests
 import json
 

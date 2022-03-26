@@ -5,5 +5,54 @@
 #
 # Your task is to use the API to find information about all the cats that
 # appear in Studio Ghibli films.
+class Cat:
+    """Class to define a Studio Ghibli cat
 
-BASE_URL = "https://ghibliapi.herokuapp.com/"
+    Args:
+        1st arg: name
+        2nd arg: gender 
+        3rd arg: hair color
+        4th arg: eye color     
+                
+    Returns:
+        A list of information of the cat in order: [name, gender, hair color, eye color]
+        """
+    def __init__(self,name,gender,hair_color,eye_color):
+        self.name=name
+        self.gender=gender
+        self.hair_color=hair_color
+        self.eye_color=eye_color
+
+    def __str__(self) -> str:
+        return(f"Cat(name={self.name},gender={self.gender},hair_color={self.hair_color},eye_color={self.eye_color})")
+
+import json
+from pprint import pprint
+import requests
+
+folder="/home/luisfelipe/Coding Nomads/python-301-main/04_web-scraping/cats.json"
+folder2="/home/luisfelipe/Coding Nomads/python-301-main/04_web-scraping/cat_temp_info.json"
+folder3="/home/luisfelipe/Coding Nomads/python-301-main/04_web-scraping/Studio_Ghibli_cats.txt"
+
+with open(folder,"r") as file:
+    data=json.load(file)["people"]
+book_of_cats=[]
+#pprint(data)
+for cat in data:
+    cat_info=requests.get(cat).json()
+    with open(folder2,"w") as file:
+        json.dump(cat_info,file)
+    with open(folder2,"r") as file:
+        cat_data=json.load(file)
+    #pprint(cat_data)
+    name=cat_data["name"]
+    gender=cat_data["gender"]
+    hair_color=cat_data["hair_color"]
+    eye_color=cat_data["eye_color"]
+    new_cat=Cat(name,gender,hair_color,eye_color)
+    book_of_cats.append(new_cat) #Adopt the cat in your book :D!
+
+for cat in book_of_cats:
+    print(cat)
+    with open(folder3,"a") as file:
+        file.write(cat.__str__()+"\n")
