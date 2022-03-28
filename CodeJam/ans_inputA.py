@@ -30,13 +30,14 @@ class project:
     Returns:
         A project object with the information about the project
         """
-    def __init__(self,name,days_req,best_before,contr_req):
+    def __init__(self,name,days_req,score,best_before,contr_req):
         self.name=name
         self.days_req=days_req
+        self.score=score
         self.best_before=best_before
         self.contr_req=contr_req
     def __str__(self) -> str:
-        return(f"Project(name:{self.name}, days_req:{self.days_req}, best_before:{self.best_before}, contr_req:{self.contr_req})")
+        return(f"Project(name:{self.name}, days_req:{self.days_req}, score:{self.score},best_before:{self.best_before}, contr_req:{self.contr_req})")
 
 folder="/home/luisfelipe/Coding Nomads/CodeJam/a_an_example.in.txt"
 clean=[]
@@ -56,6 +57,8 @@ print(f"info:{info}, contributors={contributors}, projects={projects}")
 #Now you must use a flag to know when you finished with the contributors
 contributing=True
 book_of_people=[]
+portfolio=[]
+solve=[]
 j=1
 cerrar=0
 cerrar+=int(contributors)
@@ -75,4 +78,24 @@ while contributing:
     if j>cerrar:
         contributing=False
         break
-pprint(book_of_people)
+#pprint(book_of_people)
+#Now we will create the project objects
+for z in range(cerrar+1,len(clean)):
+    item=clean[z].split(" ",5)
+    if len(item)==5:
+        namep=item[0]
+        days_req=item[1]
+        score=item[2]
+        best_before=item[3]
+        contr_req=item[4]    
+        proyecto=project(namep,days_req,score,best_before,contr_req)
+        portfolio.append(proyecto)
+        for x in range(int(contr_req)):
+            z+=1
+            quality=clean[z].split(" ",2)
+            nameq=quality[0]
+            level=quality[1]
+            resolv=contributor(namep,nameq,level)
+            solve.append(resolv.__str__())
+    z+=1
+pprint(solve)
