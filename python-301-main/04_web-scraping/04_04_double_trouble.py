@@ -26,4 +26,32 @@ with open(folder,"r") as file:
 
 #3) Make the Calls
 name=data["artists"][0]["strArtist"]
-print(name)
+nac=data["artists"][0]["intBornYear"]
+stilo=data["artists"][0]["strStyle"]
+country=data["artists"][0]["strCountry"]
+country=str(country)
+elems=country.split(", ")
+# print(f"The country is {elems[1]}")
+print(f"{name} is an artist from {country}, borned in {nac}. It's style of music is {stilo}.")
+ask2=input(f'You want to know more information about the country of {name}? ')
+if ask2=="Yes" or ask2=="yes":
+    url2=f"https://restcountries.com/v3.1/name/{elems[1]}"
+    info_country=requests.get(url2).json()
+    folder="/Users/flormariamorafallas/Desktop/CodingNomads/Python-Study/python-301-main/04_web-scraping/country_info.json"
+    with open(folder,"w") as file:
+        json.dump(info_country,file)
+    with open(folder,"r") as file:
+        data2=json.load(file)
+
+    population=data2[0]["population"]
+    area=data2[0]["area"]
+    maps=data2[0]["area"]
+    lang=data2[0]["languages"].values()
+    langs=[]
+    for x in lang:
+        langs.append(x)
+    langs=", ".join(langs)
+    print(f"{elems[1]} have a population of {population} habitants an of {area} km2 and the spoken language/s are {langs}")
+
+
+
