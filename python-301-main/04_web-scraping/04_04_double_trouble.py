@@ -7,9 +7,10 @@
 import requests
 import json 
 from pprint import pprint
+import webbrowser
 
 #1) Select an artist and research about  
-ask=input(f"From which artist you will like to know about? ")
+ask=input(f"\nFrom which artist you will like to know about? ")
 
 url= f"https://theaudiodb.com/api/v1/json/2/search.php?s={ask}"
 artist=requests.get(url).json()
@@ -17,8 +18,8 @@ artist=requests.get(url).json()
 
 #2) For the sake of fewer requests, create a Json with the content of the request
 folder="/Users/flormariamorafallas/Desktop/CodingNomads/Python-Study/python-301-main/04_web-scraping/artist.json"
-# with open(folder,"w") as file:
-#     json.dump(artist,file)
+with open(folder,"w") as file:
+    json.dump(artist,file)
 
 with open(folder,"r") as file:
     data=json.load(file)
@@ -33,7 +34,7 @@ country=str(country)
 elems=country.split(", ")
 # print(f"The country is {elems[1]}")
 print(f"{name} is an artist from {country}, borned in {nac}. It's style of music is {stilo}.")
-ask2=input(f'You want to know more information about the country of {name}? ')
+ask2=input(f'\nYou want to know more information about the country of {name}? ')
 if ask2=="Yes" or ask2=="yes":
     url2=f"https://restcountries.com/v3.1/name/{elems[1]}"
     info_country=requests.get(url2).json()
@@ -45,13 +46,23 @@ if ask2=="Yes" or ask2=="yes":
 
     population=data2[0]["population"]
     area=data2[0]["area"]
-    maps=data2[0]["area"]
+    maps=data2[0]["maps"]["googleMaps"]
     lang=data2[0]["languages"].values()
     langs=[]
     for x in lang:
         langs.append(x)
     langs=", ".join(langs)
     print(f"{elems[1]} have a population of {population} habitants an of {area} km2 and the spoken language/s are {langs}")
+# 4) Ask about displaying a map
+    ask3=input(f"\nSince you are interested, you will like to see it in the map? ")  
+    if ask3=="Yes" or "yes":
+        webbrowser.open(maps,new=0, autoraise=True)
+    else:
+        print(f"Oh that's oh right! Thanks for using the program!")
+        quit()
+else:
+    print(f"Oh that's oh right! Thanks for using the program!")
+
 
 
 
