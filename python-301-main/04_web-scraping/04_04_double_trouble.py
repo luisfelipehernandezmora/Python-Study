@@ -13,7 +13,7 @@ import webbrowser
 information about the country as well, it can displays a Google Maps view from the country if desired"""
 
 #1) Select an artist and research about  
-ask=input(f"\nFrom which artist you will like to know about? (If you have spaces, put underscore instead) ")
+ask=input(f"\nFrom which artist you will like to know about? (If it have spaces, put underscore instead) ")
 
 url= f"https://theaudiodb.com/api/v1/json/2/search.php?s={ask}"
 artist=requests.get(url).json()

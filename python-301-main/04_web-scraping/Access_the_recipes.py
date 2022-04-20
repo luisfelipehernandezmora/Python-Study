@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 
-#Scrape the idnex page and get all the links
+#Scrape the index page and get all the links
 url="https://codingnomads.github.io/recipes/"
 page=requests.get(url).text
 #print(recipe)

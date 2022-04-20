@@ -5,4 +5,16 @@
 # extract the text content from that article, and save it to a local text file.
 # BONUS TASK: Use RegExp to find all numbers in the text.
 
-URL = "https://en.wikipedia.org/wiki/Web_scraping"
+url = "https://en.wikipedia.org/wiki/Web_scraping"
+import requests
+from bs4 import BeautifulSoup
+
+folder="/Users/flormariamorafallas/Desktop/CodingNomads/Python-Study/python-301-main/04_web-scraping/wikipedia_articles"
+
+page=requests.get(url).text
+soup=BeautifulSoup(page, features="html.parser")
+
+links=soup.find_all("a")
+for link in links:
+    print(link)
+    #endpoint=link["href"]
