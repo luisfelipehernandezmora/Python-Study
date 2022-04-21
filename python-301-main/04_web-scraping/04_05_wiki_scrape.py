@@ -48,3 +48,5 @@ for i in wiki_arts:
 mine=requests.get(wiki_arts[num]).text
 with open (folder,"w") as file:
     file.write(mine)
+
+print(f"\n Thank you!")
