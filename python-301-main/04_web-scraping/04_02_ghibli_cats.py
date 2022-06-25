@@ -32,6 +32,7 @@ class Cat:
     def __str__(self) -> str:
         return(f"Cat(name={self.name},gender={self.gender},hair_color={self.hair_color},eye_color={self.eye_color})")
 
+#A json file with the cats names, don't have the full information 
 cats_file=os.getcwd()+"/python-301-main/04_web-scraping/cats.json"
 
 if os.path.isfile(cats_file)==False:
@@ -40,32 +41,32 @@ if os.path.isfile(cats_file)==False:
     with open(cats_file,"w") as file:
         json.dump(cats_page,file)
 
-
-
-
-
-folder2=os.getcwd()+"/python-301-main/04_web-scraping/cat_temp_info.json"
+cats_info=os.getcwd()+"/python-301-main/04_web-scraping/cat_temp_info.json"
 folder3=os.getcwd()+"/python-301-main/04_web-scraping/Studio_Ghibli_cats.txt"
 
 with open(cats_file,"r") as file:
     data=json.load(file)["people"]
 book_of_cats=[]
-#pprint(data)
-for cat in data:
-    cat_info=requests.get(cat).json()
-    with open(folder2,"w") as file:
-        json.dump(cat_info,file)
-    with open(folder2,"r") as file:
-        cat_data=json.load(file)
-    #pprint(cat_data)
-    name=cat_data["name"]
-    gender=cat_data["gender"]
-    hair_color=cat_data["hair_color"]
-    eye_color=cat_data["eye_color"]
-    new_cat=Cat(name,gender,hair_color,eye_color)
-    book_of_cats.append(new_cat) #Adopt the cat in your book :D!
+# print("this is data")
+# pprint(data)
 
-for cat in book_of_cats:
-    print(cat)
-    with open(folder3,"a") as file:
-        file.write(cat.__str__()+"\n")
+if os.path.isfile(cats_info)==False:
+    for cat in data:
+        cat_info=requests.get(cat).json()
+        with open(cats_info,"a") as file:
+            json.dump(cat_info,file)
+
+with open(cats_info,"r") as file:
+    cat_data=json.load(file)
+pprint(cat_data)
+# name=cat_data["name"]
+# gender=cat_data["gender"]
+# hair_color=cat_data["hair_color"]
+# eye_color=cat_data["eye_color"]
+# new_cat=Cat(name,gender,hair_color,eye_color)
+# book_of_cats.append(new_cat) #Adopt the cat in your book :D!
+
+# for cat in book_of_cats:
+#     print(cat)
+#     with open(folder3,"a") as file:
+#         file.write(cat.__str__()+"\n")
