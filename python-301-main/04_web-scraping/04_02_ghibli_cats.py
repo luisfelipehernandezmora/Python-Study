@@ -5,6 +5,12 @@
 #
 # Your task is to use the API to find information about all the cats that
 # appear in Studio Ghibli films.
+
+
+import os
+import json
+from pprint import pprint
+import requests
 class Cat:
     """Class to define a Studio Ghibli cat
 
@@ -26,15 +32,22 @@ class Cat:
     def __str__(self) -> str:
         return(f"Cat(name={self.name},gender={self.gender},hair_color={self.hair_color},eye_color={self.eye_color})")
 
-import json
-from pprint import pprint
-import requests
+cats_file=os.getcwd()+"/python-301-main/04_web-scraping/cats.json"
 
-folder="/home/luisfelipe/Coding Nomads/python-301-main/04_web-scraping/cats.json"
-folder2="/home/luisfelipe/Coding Nomads/python-301-main/04_web-scraping/cat_temp_info.json"
-folder3="/home/luisfelipe/Coding Nomads/python-301-main/04_web-scraping/Studio_Ghibli_cats.txt"
+if os.path.isfile(cats_file)==False:
+    url = "https://ghibliapi.herokuapp.com/species/603428ba-8a86-4b0b-a9f1-65df6abef3d3"
+    cats_page=requests.get(url).json()
+    with open(cats_file,"w") as file:
+        json.dump(cats_page,file)
 
-with open(folder,"r") as file:
+
+
+
+
+folder2=os.getcwd()+"/python-301-main/04_web-scraping/cat_temp_info.json"
+folder3=os.getcwd()+"/python-301-main/04_web-scraping/Studio_Ghibli_cats.txt"
+
+with open(cats_file,"r") as file:
     data=json.load(file)["people"]
 book_of_cats=[]
 #pprint(data)

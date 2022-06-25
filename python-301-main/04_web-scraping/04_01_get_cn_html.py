@@ -5,6 +5,7 @@
 # very common. head over to StackOverflow and find a solution!
 
 import requests
+from pprint import pprint
 url="https://codingnomads.co/"
 page=requests.get(url).text
-print(page)
+pprint(page)

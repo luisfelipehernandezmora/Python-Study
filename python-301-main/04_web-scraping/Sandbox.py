@@ -2,25 +2,35 @@ import requests
 from bs4 import BeautifulSoup
 from pprint import pprint
 
-# # from the index get the links
-# url="https://codingnomads.github.io/recipes/"
-# page=requests.get(url).text
-# # print(page)
-# soup=BeautifulSoup(page,features="html.parser")
-# links=soup.find_all("a")
-# for link in links:  #Get HTML's here
-#     print(link["href"])
-
-# Get the Title, author and text describing the recipe
-url2="https://codingnomads.github.io/recipes/recipes/68-kimchi-fried-rice-wi.html"
-page=requests.get(url2).text
+"-------------------------1---------------------"
+first_url="https://codingnomads.github.io/recipes/"
+page=requests.get(first_url).text
 soup=BeautifulSoup(page,features="html.parser")
-#print(soup.prettify)
-#print(soup)
+
+links=[]
+all_the_links=soup.find_all("a")
+for each_link in all_the_links:
+    links.append(each_link["href"])  
+
+ask=input(f"The available recipes are:\n{pprint(links)}\nwhich one you will like to open? ")
+
+"-------------------------2---------------------"
+# url="https://codingnomads.github.io/recipes/recipes/68-kimchi-fried-rice-wi.html"
+url=first_url+ask
+
+page=requests.get(url)
+soup=BeautifulSoup(page.text)
+# print(soup.prettify)
+
 title=soup.find("h1",class_="title").text
 author=soup.find("p",class_="author").text
-body=soup.find("div",class_="md").text
-# print(f"The recipe in this link is {title} \n")
-# print(f"Created {author} \n")
-# print(f"And the steps to cook are \n {body} \n")
-print("this is a change")
+recipe=soup.find("div",class_="md").text
+
+line=f"The recipe {title} is made {author}\nthe recipe is {recipe}"
+print(line)
+
+
+
+"-------------------------3---------------------"
+
+
