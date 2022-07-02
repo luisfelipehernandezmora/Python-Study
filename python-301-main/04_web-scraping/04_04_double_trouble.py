@@ -8,6 +8,7 @@ import requests
 import json 
 from pprint import pprint
 import webbrowser
+import os
 
 """This program asks about a musical artist and look up some informations about him/her and some 
 information about the country as well, it can displays a Google Maps view from the country if desired"""
@@ -20,7 +21,7 @@ artist=requests.get(url).json()
 #pprint(artist)
 
 #2) For the sake of fewer requests, create a Json with the content of the request
-folder="/Users/flormariamorafallas/Desktop/CodingNomads/Python-Study/python-301-main/04_web-scraping/artist.json"
+folder=os.getcwd()+"/python-301-main/04_web-scraping/artist.json"
 with open(folder,"w") as file:
     json.dump(artist,file)
 
@@ -42,7 +43,7 @@ if ask2=="Yes" or ask2=="yes":
     # if elems[1] == "USA"
     url2=f"https://restcountries.com/v3.1/name/{elems[-1]}"
     info_country=requests.get(url2).json()
-    folder="/Users/flormariamorafallas/Desktop/CodingNomads/Python-Study/python-301-main/04_web-scraping/country_info.json"
+    folder=os.getcwd()+"/python-301-main/04_web-scraping/country_info.json"
     with open(folder,"w") as file:
         json.dump(info_country,file)
     with open(folder,"r") as file:
@@ -57,6 +58,7 @@ if ask2=="Yes" or ask2=="yes":
         langs.append(x)
     langs=", ".join(langs)
     print(f"\n{elems[-1]} have a population of {population} habitants an of {area} km2 and the spoken language/s are {langs}")
+
 # 4) Ask about displaying a map
     ask3=input(f"\nSince you are interested, you will like to see it in the map? ")  
     if ask3=="Yes" or "yes":
