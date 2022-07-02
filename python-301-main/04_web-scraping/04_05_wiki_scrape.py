@@ -9,7 +9,7 @@ url = "https://en.wikipedia.org/wiki/Web_scraping"
 import requests
 from bs4 import BeautifulSoup
 from random import randint
-
+import os
 
 def wikipedia_article(link):
     """Function to determine if a hyperlink goes to a wikipedia article
@@ -25,7 +25,7 @@ def wikipedia_article(link):
         flag=True
     return flag
 
-folder="/Users/flormariamorafallas/Desktop/CodingNomads/Python-Study/python-301-main/04_web-scraping/wikipedia_articles/random_wiki_art.rtf"
+folder=os.getcwd()+"/python-301-main/04_web-scraping/wikipedia_articles/random_wiki_art.txt"
 page=requests.get(url).text
 soup=BeautifulSoup(page, features="html.parser")
 links=soup.find_all("a")
@@ -40,7 +40,6 @@ for link in links:
         #print(endpoint)
 
 num=randint(0,len(wiki_arts)-1)
-#print(len(wiki_arts), num)
 
 for i in wiki_arts:
     print(i)
