@@ -13,6 +13,7 @@
 from pprint import pprint
 import requests
 import json
+import os
 
 class pokemon:
     """Class to define Pokemons!
@@ -30,12 +31,12 @@ class pokemon:
         self.number=number
         self.types=types
     def __str__(self) -> str:
-        return(f"Pokemon(name={self.name},number={self.number},types={self.types})")
+        return(f"Pokemon(name={self.name}, number={self.number}, types={self.types})")
 
 BASE_URL = "https://pokeapi.co/api/v2/"
 url="https://pokeapi.co/api/v2/pokemon/1/"
 pokedex=[]
-folder="/home/luisfelipe/Coding Nomads/python-301-main/04_web-scraping/temp_pokemon.json"
+folder=os.getcwd()+"/python-301-main/04_web-scraping/temp_pokemon.json"
 def list_of_pokemons():
     """Creates a list of all the urls to access each pokemon, the user will give an input of how 
     many pokemons wants to look for
@@ -64,7 +65,7 @@ def create_pokemon_record(url):
     Returns:
         Nothing. It just creates a file in a particular location that the function 'look for pokemon' will use
         """
-    folder="/home/luisfelipe/Coding Nomads/python-301-main/04_web-scraping/temp_pokemon.json"
+    folder=os.getcwd()+"/python-301-main/04_web-scraping/temp_pokemon.json"
     pokemons=requests.get(url).json()
     with open(folder,"w") as file:
         json.dump(pokemons,file)
@@ -76,7 +77,7 @@ def look_for_pokemon():
     Returns:
         A pokemon object
         """
-    folder="/home/luisfelipe/Coding Nomads/python-301-main/04_web-scraping/temp_pokemon.json"
+    folder=os.getcwd()+"/python-301-main/04_web-scraping/temp_pokemon.json"
     with open(folder,"r") as file:
         data=json.load(file)
     name=data["forms"][0]["name"]
