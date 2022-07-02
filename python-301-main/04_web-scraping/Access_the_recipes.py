@@ -1,5 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
+import os
 
 #Scrape the index page and get all the links
 url="https://codingnomads.github.io/recipes/"
@@ -8,7 +9,7 @@ page=requests.get(url).text
 soup=BeautifulSoup(page,features="html.parser")
 links=soup.find_all("a")
 new_link=[]
-folder="/home/luisfelipe/Coding Nomads/python-301-main/04_web-scraping/recipes"
+folder=os.getcwd()+"/python-301-main/04_web-scraping/recipes"
 book={}
 def look_recipe(recipe):
     """Function to scape a specific recipe
