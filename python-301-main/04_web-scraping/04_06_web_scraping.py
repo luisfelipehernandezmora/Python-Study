@@ -8,7 +8,6 @@
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 
-
 ## OPTIONS FOR THE SELENIUM BROWSER
 webdriver.DesiredCapabilities.CHROME['acceptSslCerts']=True
 options = webdriver.ChromeOptions()
@@ -31,7 +30,6 @@ teams=driver.find_elements_by_class_name("tableCellParticipant__image")
 for team in teams:
     equipos.append(team.accessible_name)
 
-
 for num_camb in range(1,15):
     #Western teams 
     num1=str(2)
@@ -51,5 +49,13 @@ for num_camb in range(1,15):
 
 
 stats=dict()
-for i in range(0,29):
-    
+print(f"\n\n\nToday stats of MLS are")
+
+for i in range(0,28):
+    stats[equipos[i]]=puntos[i]
+    if i==0:
+        print("\n    Western teams")
+    if i==13:
+        print("\n    Eastern teams")
+    print(f"{equipos[i]} : {puntos[i]}")
+
