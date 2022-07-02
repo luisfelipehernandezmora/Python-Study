@@ -26,8 +26,30 @@ url="https://www.livesport.com/mls/standings/"
 driver.get(url)
 source_code = driver.page_source
 equipos=[]
+puntos=[]
 teams=driver.find_elements_by_class_name("tableCellParticipant__image")
-for i in teams:
-    equipos.append(i.accessible_name)
+for team in teams:
+    equipos.append(team.accessible_name)
 
-equipos
+
+for num_camb in range(1,15):
+    #Western teams 
+    num1=str(2)
+    num_camb=str(num_camb)
+    xpath_for_scores='//*[@id="tournament-table-tabs-and-content"]/div[3]/div[1]/div['+num1+']/div/div[2]/div['+num_camb+']/span[6]'
+    score_of_the_team=driver.find_element_by_xpath(xpath_for_scores).text
+    puntos.append(score_of_the_team)
+
+
+for num_camb in range(1,15):
+    #Eastern teams 
+    num1=str(3)
+    num_camb=str(num_camb)
+    xpath_for_scores='//*[@id="tournament-table-tabs-and-content"]/div[3]/div[1]/div['+num1+']/div/div[2]/div['+num_camb+']/span[6]'
+    score_of_the_team=driver.find_element_by_xpath(xpath_for_scores).text
+    puntos.append(score_of_the_team)
+
+
+stats=dict()
+for i in range(0,29):
+    
